@@ -30,10 +30,10 @@ public class MarkCommand extends Command {
             } else {
                 taskList.getTask(taskIndex).markAsDone();
                 System.out.println("\uD83E\uDD16 [Helix] : Nice! I've marked this task as done.");
-                System.out.println("══════════════════════════════");
+                System.out.println("════════════════════════════════════");
                 System.out.println("✅ Task Marked as Complete:");
                 System.out.println("  " + taskList.getTask(taskIndex));
-                System.out.println("══════════════════════════════\n");
+                System.out.println("════════════════════════════════════\n");
             }
         } else {
             System.out.println("\uD83E\uDD16 [Helix] : Invalid task number.\n");

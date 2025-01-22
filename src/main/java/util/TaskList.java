@@ -50,7 +50,6 @@ public class TaskList {
      *
      * @param taskIndex the index of the task to be retrieved
      * @return the task at the specified index
-     * @throws IndexOutOfBoundsException if the index is out of bounds
      */
     public Task getTask(int taskIndex) {
         return this.tasks.get(taskIndex);

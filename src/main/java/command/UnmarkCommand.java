@@ -30,10 +30,10 @@ public class UnmarkCommand extends Command {
             } else {
                 taskList.getTask(taskIndex).markAsUndone();
                 System.out.println("\uD83E\uDD16 [Helix] : OK, I've marked this task as not done yet.");
-                System.out.println("══════════════════════════════");
+                System.out.println("════════════════════════════════════");
                 System.out.println("❌ Task Marked as Incomplete:");
                 System.out.println("  " + taskList.getTask(taskIndex));
-                System.out.println("══════════════════════════════\n");
+                System.out.println("════════════════════════════════════\n");
             }
         } else {
             System.out.println("\uD83E\uDD16 [Helix] : Invalid task number.\n");

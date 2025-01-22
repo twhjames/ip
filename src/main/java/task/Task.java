@@ -1,9 +1,10 @@
 package task;
 
 /**
- * Represents a task with a description and a completion status.
+ * Abstract base class representing a generic task.
+ * Task contains a description and a completion status.
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -48,6 +49,20 @@ public class Task {
     public boolean isDone() {
         return this.isDone;
     }
+
+    /**
+     * Returns the type of the task. To be overridden by subclasses.
+     *
+     * @return the type of the task as a string
+     */
+    public abstract String getTaskType();
+
+    /**
+     * Returns task-specific details. To be overridden by subclasses.
+     *
+     * @return Additional details about the task.
+     */
+    public abstract String getTaskDetails();
 
     /**
      * Returns a string representation of the task, including its completion status.

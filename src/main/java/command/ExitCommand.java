@@ -6,6 +6,7 @@ import util.TaskList;
  * A command to terminate the application.
  */
 public class ExitCommand extends Command {
+
     /**
      * Executes the exit command, displaying a farewell message.
      *

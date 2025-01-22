@@ -10,12 +10,12 @@ public class AddCommand extends Command {
     private final Task task;
 
     /**
-     * Constructs an AddCommand with the specified task description.
+     * Constructs an AddCommand with the specified task.
      *
-     * @param input the description of the task to be added
+     * @param task the task to be added
      */
-    public AddCommand(String input) {
-        this.task = new Task(input);
+    public AddCommand(Task task) {
+        this.task = task;
     }
 
     /**
@@ -25,9 +25,23 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList) {
+        taskList.addTask(task);
+
+        String taskType = task.getTaskType();
         String taskDescription = task.getDescription();
-        System.out.println("\uD83E\uDD16 [Helix] : Added Task - " + taskDescription + "\n");
-        taskList.addTask(this.task);
+        String taskDetails = task.getTaskDetails();
+
+        System.out.println("════════════════════════════════════");
+        System.out.println(" 🗂️ Task Added!               ");
+        System.out.println("════════════════════════════════════");
+        System.out.println("  📋 Type: " + taskType);
+        System.out.println("  📝 Description: " + taskDescription);
+        if (!taskDetails.isEmpty()) {
+            System.out.println("  " + taskDetails);
+        }
+        System.out.println("\nYou now have " + taskList.getTaskCount() + " task(s) in your list.");
+        System.out.println("════════════════════════════════════\n");
     }
+
 }
 
