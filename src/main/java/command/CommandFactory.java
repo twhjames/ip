@@ -32,6 +32,7 @@ public class CommandFactory {
             case "bye" -> createExitCommand(args);
             case "mark" -> createMarkCommand(args);
             case "unmark" -> createUnmarkCommand(args);
+            case "delete" -> createDeleteCommand(args);
             default -> throw new InvalidCommandException();
         };
     }
@@ -178,5 +179,27 @@ public class CommandFactory {
             throw new InvalidNumberFormatException("The task number must be a positive integer. Example: unmark <task number>");
         }
         return new UnmarkCommand(Integer.parseInt(args) - 1);
+    }
+
+    /**
+     * Creates a {@link DeleteCommand} after validating arguments.
+     *
+     * @param args the arguments for the delete command (task number)
+     * @return a {@link Command} instance for deleting a task
+     * @throws MissingArgumentException if the task number is missing
+     * @throws InvalidNumberFormatException if the task number is not a valid positive integer
+     */
+    private static Command createDeleteCommand(String args) throws HelixException {
+        if (args.isEmpty()) {
+            throw new MissingArgumentException("delete", "delete <task number>");
+        }
+        String[] splitArgs = args.split(" ");
+        if (splitArgs.length > 1) {
+            throw new TooManyArgumentsException("delete", "delete <task number>");
+        }
+        if (!args.matches("\\d+")) {
+            throw new InvalidNumberFormatException("The task number must be a positive integer. Example: delete <task number>");
+        }
+        return new DeleteCommand(Integer.parseInt(args) - 1);
     }
 }

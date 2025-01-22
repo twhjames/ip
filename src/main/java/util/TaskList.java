@@ -28,6 +28,16 @@ public class TaskList {
     }
 
     /**
+     * Removes a task from the task list by its index.
+     *
+     * @param taskIndex the index of the task to be removed
+     * @return the task that was removed
+     */
+    public Task removeTask(int taskIndex) {
+        return this.tasks.remove(taskIndex);
+    }
+
+    /**
      * Retrieves the list of tasks.
      *
      * @return a list of tasks in the TaskList
