@@ -1,8 +1,8 @@
 import command.Command;
 import command.CommandFactory;
+import exception.HelixException;
 import util.TaskList;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -40,12 +40,18 @@ public class Helix {
             System.out.print("👤 [You]   : ");
             String input = sc.nextLine();
 
-            // instantiate command.Command object
-            Command command = CommandFactory.createCommand(input);
+            try {
+                // instantiate command.Command object
+                Command command = CommandFactory.createCommand(input);
 
-            // execute command.Command using polymorphism
-            command.execute(taskList);
-            isExit = command.isExit();
+                // execute command.Command using polymorphism
+                command.execute(taskList);
+                isExit = command.isExit();
+            } catch (HelixException e) {
+                System.out.println(e.getFormattedMessage());
+            } catch (Exception e) {
+                System.out.println("⚠️ [Helix] : An unexpected error occurred. Please try again.");
+            }
         }
 
         // clean up resources

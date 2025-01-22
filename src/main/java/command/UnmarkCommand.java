@@ -1,5 +1,7 @@
 package command;
 
+import exception.HelixException;
+import exception.TaskIndexOutOfBoundsException;
 import util.TaskList;
 
 /**
@@ -21,22 +23,21 @@ public class UnmarkCommand extends Command {
      * Executes the unmark command, marking the specified task as not done.
      *
      * @param taskList the TaskList containing the task to be updated
+     * @throws HelixException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList) {
-        if (taskIndex >= 0 && taskIndex < taskList.getTaskCount()) {
-            if (!taskList.getTask(taskIndex).isDone()) {
-                System.out.println("\uD83E\uDD16 [Helix] : This task is already marked as done!\n");
-            } else {
-                taskList.getTask(taskIndex).markAsUndone();
-                System.out.println("\uD83E\uDD16 [Helix] : OK, I've marked this task as not done yet.");
-                System.out.println("════════════════════════════════════");
-                System.out.println("❌ Task Marked as Incomplete:");
-                System.out.println("  " + taskList.getTask(taskIndex));
-                System.out.println("════════════════════════════════════\n");
-            }
+    public void execute(TaskList taskList) throws HelixException {
+        if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
+            throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
+        }
+
+        // Unmark the task as not done
+        if (!taskList.getTask(taskIndex).isDone()) {
+            System.out.println("\uD83E\uDD16 [Helix] : This task is already not done!\n");
         } else {
-            System.out.println("\uD83E\uDD16 [Helix] : Invalid task number.\n");
+            taskList.getTask(taskIndex).markAsUndone();
+            System.out.println("❌ [Helix] : Task marked as incomplete!");
+            System.out.println("    " + taskList.getTask(taskIndex) + "\n");
         }
     }
 }

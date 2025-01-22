@@ -1,5 +1,6 @@
 package command;
 
+import exception.HelixException;
 import util.TaskList;
 
 /**
@@ -12,8 +13,9 @@ public abstract class Command {
      * Executes the command on the specified TaskList.
      *
      * @param taskList the TaskList on which the command will operate
+     * @throws HelixException if the command fails
      */
-    public abstract void execute(TaskList taskList);
+    public abstract void execute(TaskList taskList) throws HelixException;
 
     /**
      * Indicates whether the command should terminate the application.
