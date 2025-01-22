@@ -1,6 +1,7 @@
 package command;
 
 import util.TaskList;
+import task.Task;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ListCommand extends Command {
         System.out.println("══════════════════════════════");
         System.out.println("📝 Task List:");
 
-        List<String> tasks = taskList.getTasks();
+        List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
             System.out.println("There's no pending tasks.");
             System.out.println("══════════════════════════════\n");

@@ -38,7 +38,7 @@ public class Helix {
         while (!isExit) {
             // retrieve user input
             System.out.print("👤 [You]   : ");
-            String input = sc.nextLine().trim().toLowerCase(Locale.ROOT);
+            String input = sc.nextLine();
 
             // instantiate command.Command object
             Command command = CommandFactory.createCommand(input);

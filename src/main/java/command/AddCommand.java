@@ -1,20 +1,21 @@
 package command;
 
 import util.TaskList;
+import task.Task;
 
 /**
  * A command to add a task to the TaskList.
  */
 public class AddCommand extends Command {
-    private final String task;
+    private final Task task;
 
     /**
      * Constructs an AddCommand with the specified task description.
      *
-     * @param task the description of the task to be added
+     * @param input the description of the task to be added
      */
-    public AddCommand(String task) {
-        this.task = task;
+    public AddCommand(String input) {
+        this.task = new Task(input);
     }
 
     /**
@@ -24,7 +25,8 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList) {
-        System.out.println("\uD83E\uDD16 [Helix] : Added Task - " + this.task + "\n");
+        String taskDescription = task.getDescription();
+        System.out.println("\uD83E\uDD16 [Helix] : Added Task - " + taskDescription + "\n");
         taskList.addTask(this.task);
     }
 }
