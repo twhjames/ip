@@ -1,12 +1,14 @@
 package task;
 
+import enums.TaskType;
+import enums.OutputSymbol;
+
 /**
  * Represents a deadline task with a description and a due date.
  * Inherits from the Task class.
  */
 public class Deadline extends Task {
 
-    private final String taskType = "D"; // Identifier for Deadline tasks
     private final String duedate; // Due date for the deadline task
 
     /**
@@ -23,11 +25,11 @@ public class Deadline extends Task {
     /**
      * Gets the type of the task.
      *
-     * @return A string representing the type of the task ("D").
+     * @return A TaskType enum representing the type of the task (DEADLINE).
      */
     @Override
-    public String getTaskType() {
-        return this.taskType;
+    public TaskType getTaskType() {
+        return TaskType.DEADLINE;
     }
 
     /**
@@ -37,7 +39,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskDetails() {
-        return "📅 Due: " + this.duedate;
+        return OutputSymbol.CALENDAR.getSymbol() + " Due: " + this.duedate;
     }
 
     /**
@@ -47,6 +49,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" + super.toString() + " (by: " + this.duedate + ")";
+        return "[" + TaskType.DEADLINE.getCode() + "]" + super.toString() + " (by: " + this.duedate + ")";
     }
 }

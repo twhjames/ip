@@ -1,5 +1,8 @@
 package command;
 
+import enums.CommandType;
+import enums.OutputSymbol;
+import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 import util.TaskList;
@@ -16,6 +19,7 @@ public class UnmarkCommand extends Command {
      * @param taskIndex the index of the task to unmark as not done
      */
     public UnmarkCommand(int taskIndex) {
+        super(CommandType.UNMARK);
         this.taskIndex = taskIndex;
     }
 
@@ -31,12 +35,15 @@ public class UnmarkCommand extends Command {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
+        String helixSymbol = OutputSymbol.HELIX.getSymbol();
+        String crossSymbol = OutputSymbol.CROSS.getSymbol();
+
         // Unmark the task as not done
-        if (!taskList.getTask(taskIndex).isDone()) {
-            System.out.println("\uD83E\uDD16 [Helix] : This task is already not done!\n");
+        if (taskList.getTask(taskIndex).isDone() != TaskStatus.COMPLETED) {
+            System.out.println(helixSymbol + " [Helix] : This task is already not done!\n");
         } else {
             taskList.getTask(taskIndex).markAsUndone();
-            System.out.println("❌ [Helix] : Task marked as incomplete!");
+            System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
             System.out.println("    " + taskList.getTask(taskIndex) + "\n");
         }
     }

@@ -1,5 +1,7 @@
 import command.Command;
 import command.CommandFactory;
+import enums.OutputSymbol;
+import enums.ExecutionStatus;
 import exception.HelixException;
 import util.TaskList;
 
@@ -14,7 +16,7 @@ public class Helix {
         // initialise variables
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
+        ExecutionStatus isExit = ExecutionStatus.CONTINUE;
         String logo = """
            ╔════════════════════════════════════════════════════════╗
            ║                                                        ║
@@ -26,18 +28,23 @@ public class Helix {
            ║                                                        ║
            ╚════════════════════════════════════════════════════════╝
            """;
+        String helixSymbol = OutputSymbol.HELIX.getSymbol();
+        String userSymbol = OutputSymbol.USER.getSymbol();
+        String warningSymbol = OutputSymbol.WARNING.getSymbol();
 
         // print introduction message
         System.out.println(logo);
         System.out.println(
-                "\uD83E\uDD16 [Helix] : Hello! I'm your personal assistant, Helix."
+                helixSymbol + " [Helix] : Hello! I'm your personal assistant, Helix."
         );
-        System.out.println("\uD83E\uDD16 [Helix] : What can I do for you today?\n");
+        System.out.println(
+                helixSymbol + " [Helix] : What can I do for you today?\n"
+        );
 
         // run chat loop
-        while (!isExit) {
+        while (isExit != ExecutionStatus.EXIT) {
             // retrieve user input
-            System.out.print("👤 [You]   : ");
+            System.out.print(userSymbol + " [You]   : ");
             String input = sc.nextLine();
 
             try {
@@ -50,7 +57,9 @@ public class Helix {
             } catch (HelixException e) {
                 System.out.println(e.getFormattedMessage());
             } catch (Exception e) {
-                System.out.println("⚠️ [Helix] : An unexpected error occurred. Please try again.");
+                System.out.println(
+                        warningSymbol + " [Helix] : An unexpected error occurred. Please try again."
+                );
             }
         }
 

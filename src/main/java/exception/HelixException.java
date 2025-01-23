@@ -1,5 +1,7 @@
 package exception;
 
+import enums.OutputSymbol;
+
 /**
  * Base class for all Helix-related exceptions.
  */
@@ -20,6 +22,6 @@ public abstract class HelixException extends Exception {
      * @return a formatted string with the exception message
      */
     public String getFormattedMessage() {
-        return "⚠️ [Helix] : " + getMessage() + "\n";
+        return OutputSymbol.WARNING.getSymbol() + "️ [Helix] : " + getMessage() + "\n";
     }
 }

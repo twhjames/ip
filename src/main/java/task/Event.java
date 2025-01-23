@@ -1,12 +1,14 @@
 package task;
 
+import enums.TaskType;
+import enums.OutputSymbol;
+
 /**
  * Represents an event task with a description, start time, and end time.
  * Inherits from the Task class.
  */
 public class Event extends Task {
 
-    private final String taskType = "E"; // Identifier for Event tasks
     private final String from; // Start time of the event
     private final String to;   // End time of the event
 
@@ -26,11 +28,11 @@ public class Event extends Task {
     /**
      * Gets the type of the task.
      *
-     * @return A string representing the type of the task ("E").
+     * @return A TaskType enum representing the type of the task (EVENT).
      */
     @Override
-    public String getTaskType() {
-        return this.taskType;
+    public TaskType getTaskType() {
+        return TaskType.EVENT;
     }
 
     /**
@@ -40,7 +42,8 @@ public class Event extends Task {
      */
     @Override
     public String getTaskDetails() {
-        return "🕒 From: " + this.from + "\n  🕒 To: " + this.to;
+        String clockSymbol = OutputSymbol.CLOCK.getSymbol();
+        return clockSymbol + " From: " + this.from + "\n  " + clockSymbol + " To: " + this.to;
     }
 
     /**
@@ -50,6 +53,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[" + TaskType.EVENT.getCode() + "]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 }

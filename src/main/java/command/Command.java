@@ -1,5 +1,7 @@
 package command;
 
+import enums.CommandType;
+import enums.ExecutionStatus;
 import exception.HelixException;
 import util.TaskList;
 
@@ -8,6 +10,26 @@ import util.TaskList;
  * Commands are executable actions that operate on a TaskList.
  */
 public abstract class Command {
+
+    private final CommandType commandType;
+
+    /**
+     * Constructs a new Command with the specified {@link CommandType}.
+     *
+     * @param commandType the type of the command
+     */
+    public Command(CommandType commandType) {
+        this.commandType = commandType;
+    }
+
+    /**
+     * Retrieves the {@link CommandType} of this command.
+     *
+     * @return the type of the command
+     */
+    public CommandType getCommandType() {
+        return commandType;
+    }
 
     /**
      * Executes the command on the specified TaskList.
@@ -18,11 +40,11 @@ public abstract class Command {
     public abstract void execute(TaskList taskList) throws HelixException;
 
     /**
-     * Indicates whether the command should terminate the application.
+     * Determines whether the application should continue or terminate after executing the command.
      *
-     * @return true if the command signals termination, false otherwise
+     * @return {@code ExecutionStatus.CONTINUE} to continue or {@code ExecutionStatus.EXIT} to terminate.
      */
-    public boolean isExit() {
-        return false;
+    public ExecutionStatus isExit() {
+        return ExecutionStatus.CONTINUE;
     }
 }

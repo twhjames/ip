@@ -1,5 +1,8 @@
 package command;
 
+import enums.CommandType;
+import enums.OutputSymbol;
+import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 import util.TaskList;
@@ -16,6 +19,7 @@ public class MarkCommand extends Command {
      * @param taskIndex the index of the task to mark as done
      */
     public MarkCommand(int taskIndex) {
+        super(CommandType.MARK);
         this.taskIndex = taskIndex;
     }
 
@@ -31,12 +35,15 @@ public class MarkCommand extends Command {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
+        String helixSymbol = OutputSymbol.HELIX.getSymbol();
+        String checkSymbol = OutputSymbol.CHECK.getSymbol();
+
         // Mark the task as done
-        if (taskList.getTask(taskIndex).isDone()) {
-            System.out.println("\uD83E\uDD16 [Helix] : This task is already marked as done!\n");
+        if (taskList.getTask(taskIndex).isDone() == TaskStatus.COMPLETED) {
+            System.out.println(helixSymbol + " [Helix] : This task is already marked as done!\n");
         } else {
             taskList.getTask(taskIndex).markAsDone();
-            System.out.println("✅ [Helix] : Task marked as complete!");
+            System.out.println(checkSymbol + " [Helix] : Task marked as complete!");
             System.out.println("    " + taskList.getTask(taskIndex) + "\n");
         }
     }

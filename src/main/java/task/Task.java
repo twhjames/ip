@@ -1,12 +1,16 @@
 package task;
 
+import enums.TaskType;
+import enums.TaskStatus;
+import enums.OutputSymbol;
+
 /**
  * Abstract base class representing a generic task.
  * Task contains a description and a completion status.
  */
 public abstract class Task {
     private final String description;
-    private boolean isDone;
+    private TaskStatus isDone;
 
     /**
      * Constructs a Task with the specified description.
@@ -15,21 +19,21 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = TaskStatus.PENDING;
     }
 
     /**
      * Marks the task as done by setting the completion status to true.
      */
     public void markAsDone() {
-        this.isDone = true;
+        this.isDone = TaskStatus.COMPLETED;
     }
 
     /**
      * Marks the task as not done by setting the completion status to false.
      */
     public void markAsUndone() {
-        this.isDone = false;
+        this.isDone = TaskStatus.PENDING;
     }
 
     /**
@@ -44,18 +48,18 @@ public abstract class Task {
     /**
      * Checks if the task is marked as done.
      *
-     * @return true if the task is done, false otherwise
+     * @return the status of the task (PENDING or COMPLETED)
      */
-    public boolean isDone() {
+    public TaskStatus isDone() {
         return this.isDone;
     }
 
     /**
      * Returns the type of the task. To be overridden by subclasses.
      *
-     * @return the type of the task as a string
+     * @return the type of the task as a TaskType Enum
      */
-    public abstract String getTaskType();
+    public abstract TaskType getTaskType();
 
     /**
      * Returns task-specific details. To be overridden by subclasses.
@@ -71,6 +75,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "✔" : " ") + "] " + description;
+        String outputSymbol = (this.isDone == TaskStatus.COMPLETED)
+                ? OutputSymbol.CHECKMARK.getSymbol() : " ";
+        return "[" + outputSymbol + "] " + description;
     }
 }

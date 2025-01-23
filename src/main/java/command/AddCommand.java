@@ -1,5 +1,7 @@
 package command;
 
+import enums.CommandType;
+import enums.OutputSymbol;
 import util.TaskList;
 import task.Task;
 
@@ -14,7 +16,8 @@ public class AddCommand extends Command {
      *
      * @param task the task to be added
      */
-    public AddCommand(Task task) {
+    public AddCommand(CommandType commandType, Task task) {
+        super(commandType);
         this.task = task;
     }
 
@@ -27,15 +30,19 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList) {
         taskList.addTask(task);
 
-        String taskType = task.getTaskType();
+        String taskType = task.getTaskType().name();
         String taskDescription = task.getDescription();
         String taskDetails = task.getTaskDetails();
 
+        String folderSymbol = OutputSymbol.FOLDER.getSymbol();
+        String clipboardSymbol = OutputSymbol.CLIPBOARD.getSymbol();
+        String noteSymbol = OutputSymbol.NOTE.getSymbol();
+
         System.out.println("════════════════════════════════════");
-        System.out.println(" 🗂️ Task Added!               ");
+        System.out.println(folderSymbol + "  Task Added!               ");
         System.out.println("════════════════════════════════════");
-        System.out.println("  📋 Type: " + taskType);
-        System.out.println("  📝 Description: " + taskDescription);
+        System.out.println("  " + clipboardSymbol +" Type: " + taskType);
+        System.out.println("  " + noteSymbol +" Description: " + taskDescription);
         if (!taskDetails.isEmpty()) {
             System.out.println("  " + taskDetails);
         }

@@ -1,5 +1,7 @@
 package command;
 
+import enums.CommandType;
+import enums.OutputSymbol;
 import util.TaskList;
 import task.Task;
 
@@ -11,15 +13,26 @@ import java.util.List;
 public class ListCommand extends Command {
 
     /**
+     * Constructs a ListCommand.
+     */
+    public ListCommand() {
+        super(CommandType.LIST);
+    }
+
+    /**
      * Executes the list command, printing all tasks in the TaskList.
      *
      * @param taskList the TaskList containing tasks to be listed
      */
     @Override
     public void execute(TaskList taskList) {
-        System.out.println("\uD83E\uDD16 [Helix] : Listing tasks...");
+
+        String helixSymbol = OutputSymbol.HELIX.getSymbol();
+        String noteSymbol = OutputSymbol.NOTE.getSymbol();
+
+        System.out.println(helixSymbol + " [Helix] : Listing tasks...");
         System.out.println("════════════════════════════════════");
-        System.out.println("📝 Task List:");
+        System.out.println(noteSymbol + " Task List:");
 
         List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {

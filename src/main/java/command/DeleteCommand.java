@@ -1,7 +1,13 @@
 package command;
 
+import enums.TaskStatus;
+import enums.TaskType;
+import enums.OutputSymbol;
+import enums.CommandType;
+
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
+
 import task.Task;
 import util.TaskList;
 
@@ -17,6 +23,7 @@ public class DeleteCommand extends Command {
      * @param taskIndex the index of the task to be deleted
      */
     public DeleteCommand(int taskIndex) {
+        super(CommandType.DELETE);
         this.taskIndex = taskIndex;
     }
 
@@ -34,19 +41,25 @@ public class DeleteCommand extends Command {
 
         // Remove the task and notify the user
         Task task = taskList.removeTask(taskIndex);
-        String taskType = task.getTaskType();
+        String taskType = task.getTaskType().name();
+        String isDone = task.isDone().name();
         String taskDescription = task.getDescription();
         String taskDetails = task.getTaskDetails();
-        boolean isDone = task.isDone();
+
+        // Output symbols for formatting
+        String removedSymbol = OutputSymbol.BIN.getSymbol();
+        String typeSymbol = OutputSymbol.CLIPBOARD.getSymbol();
+        String descriptionSymbol = OutputSymbol.NOTE.getSymbol();
+        String completedSymbol = OutputSymbol.WRENCH.getSymbol();
 
         System.out.println("════════════════════════════════════");
-        System.out.println("🗑️ Task Removed:");
-        System.out.println("  📋 Type: " + taskType);
-        System.out.println("  📝 Description: " + taskDescription);
+        System.out.println(removedSymbol + " Task Removed:");
+        System.out.println("  " + typeSymbol + " Type: " + taskType);
+        System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
         if (!taskDetails.isEmpty()) {
             System.out.println("  " + taskDetails);
         }
-        System.out.println("  🛠️ Completed: " + isDone);
+        System.out.println("  " + completedSymbol + " Completed: " + isDone);
         System.out.println("You now have " + taskList.getTaskCount() + " task(s) in your list.");
         System.out.println("════════════════════════════════════\n");
     }

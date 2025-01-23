@@ -1,12 +1,14 @@
 package task;
 
+import enums.TaskType;
+import enums.TaskStatus;
+import enums.OutputSymbol;
+
 /**
  * Represents a todo task with a description.
  * Inherits from the Task class.
  */
 public class Todo extends Task {
-
-    private final String taskType = "T"; // Identifier for Todo tasks
 
     /**
      * Constructs a Todo task with the specified description.
@@ -20,11 +22,11 @@ public class Todo extends Task {
     /**
      * Gets the type of the task.
      *
-     * @return A string representing the type of the task ("T").
+     * @return A TaskType enum representing the type of the task (TODO).
      */
     @Override
-    public String getTaskType() {
-        return this.taskType;
+    public TaskType getTaskType() {
+        return TaskType.TODO;
     }
 
     /**
@@ -44,6 +46,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" + super.toString();
+        return "[" + TaskType.TODO.getCode() + "]" + super.toString();
     }
 }
