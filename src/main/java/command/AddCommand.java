@@ -39,7 +39,7 @@ public class AddCommand extends Command {
         String noteSymbol = OutputSymbol.NOTE.getSymbol();
 
         System.out.println("════════════════════════════════════");
-        System.out.println(folderSymbol + "  Task Added!               ");
+        System.out.println(folderSymbol + "  Task Added!");
         System.out.println("════════════════════════════════════");
         System.out.println("  " + clipboardSymbol +" Type: " + taskType);
         System.out.println("  " + noteSymbol +" Description: " + taskDescription);

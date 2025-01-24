@@ -4,4 +4,5 @@ deadline Submit assignment /by 2025-01-30
 list
 mark 1
 unmark 1
+delete 1
 bye

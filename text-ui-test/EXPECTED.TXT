@@ -12,18 +12,18 @@
 🤖 [Helix] : What can I do for you today?
 
 👤 [You]   : ════════════════════════════════════
- 🗂️ Task Added!
+🗂️  Task Added!
 ════════════════════════════════════
-  📋 Type: T
+  📋 Type: TODO
   📝 Description: Read a book
 
 You now have 1 task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : ════════════════════════════════════
- 🗂️ Task Added!
+🗂️  Task Added!
 ════════════════════════════════════
-  📋 Type: E
+  📋 Type: EVENT
   📝 Description: Team meeting
   🕒 From: 2pm
   🕒 To: 3pm
@@ -32,9 +32,9 @@ You now have 2 task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : ════════════════════════════════════
- 🗂️ Task Added!
+🗂️  Task Added!
 ════════════════════════════════════
-  📋 Type: D
+  📋 Type: DEADLINE
   📝 Description: Submit assignment
   📅 Due: 2025-01-30
 
@@ -49,20 +49,23 @@ You now have 3 task(s) in your list.
     3. [D][ ] Submit assignment (by: 2025-01-30)
 ════════════════════════════════════
 
-👤 [You]   : 🤖 [Helix] : Nice! I've marked this task as done.
-════════════════════════════════════
-✅ Task Marked as Complete:
-  [T][✔] Read a book
-════════════════════════════════════
+👤 [You]   : ✅ [Helix] : Task marked as complete!
+    [T][✔] Read a book
 
-👤 [You]   : 🤖 [Helix] : OK, I've marked this task as not done yet.
+👤 [You]   : ❌ [Helix] : Task marked as incomplete!
+    [T][ ] Read a book
+
+👤 [You]   : ════════════════════════════════════
+🗑️  Task Removed!
 ════════════════════════════════════
-❌ Task Marked as Incomplete:
-  [T][ ] Read a book
+  📋 Type: TODO
+  📝 Description: Read a book
+  🛠️ Task Status: PENDING
+
+You now have 2 task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : 🤖 [Helix] : Bye! Hope to see you soon! 👋
-
 =========================================================
 ✨ Thank you for using Helix. Have a great day! ✨
 =========================================================

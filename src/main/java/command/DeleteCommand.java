@@ -53,14 +53,15 @@ public class DeleteCommand extends Command {
         String completedSymbol = OutputSymbol.WRENCH.getSymbol();
 
         System.out.println("════════════════════════════════════");
-        System.out.println(removedSymbol + " Task Removed:");
+        System.out.println(removedSymbol + "  Task Removed!");
+        System.out.println("════════════════════════════════════");
         System.out.println("  " + typeSymbol + " Type: " + taskType);
         System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
         if (!taskDetails.isEmpty()) {
             System.out.println("  " + taskDetails);
         }
-        System.out.println("  " + completedSymbol + " Completed: " + isDone);
-        System.out.println("You now have " + taskList.getTaskCount() + " task(s) in your list.");
+        System.out.println("  " + completedSymbol + " Task Status: " + isDone);
+        System.out.println("\nYou now have " + taskList.getTaskCount() + " task(s) in your list.");
         System.out.println("════════════════════════════════════\n");
     }
 }
