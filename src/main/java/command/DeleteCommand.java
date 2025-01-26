@@ -1,7 +1,5 @@
 package command;
 
-import enums.TaskStatus;
-import enums.TaskType;
 import enums.OutputSymbol;
 import enums.CommandType;
 
@@ -9,7 +7,7 @@ import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 
 import task.Task;
-import util.TaskList;
+import task.TaskList;
 
 /**
  * A command to delete a task from the task list.

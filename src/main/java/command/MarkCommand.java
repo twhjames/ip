@@ -5,7 +5,7 @@ import enums.OutputSymbol;
 import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
-import util.TaskList;
+import task.TaskList;
 
 /**
  * A command to mark a task as done in the TaskList.

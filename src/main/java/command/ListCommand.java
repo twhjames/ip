@@ -2,7 +2,7 @@ package command;
 
 import enums.CommandType;
 import enums.OutputSymbol;
-import util.TaskList;
+import task.TaskList;
 import task.Task;
 
 import java.util.List;

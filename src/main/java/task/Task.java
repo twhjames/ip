@@ -23,14 +23,14 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done by setting the completion status to true.
+     * Marks the task as done by setting the completion status to COMPLETED.
      */
     public void markAsDone() {
         this.isDone = TaskStatus.COMPLETED;
     }
 
     /**
-     * Marks the task as not done by setting the completion status to false.
+     * Marks the task as not done by setting the completion status to PENDING.
      */
     public void markAsUndone() {
         this.isDone = TaskStatus.PENDING;

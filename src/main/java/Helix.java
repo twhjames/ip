@@ -3,7 +3,7 @@ import command.CommandFactory;
 import enums.OutputSymbol;
 import enums.ExecutionStatus;
 import exception.HelixException;
-import util.TaskList;
+import task.TaskList;
 
 import java.util.Scanner;
 

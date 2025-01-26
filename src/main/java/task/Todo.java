@@ -1,8 +1,6 @@
 package task;
 
 import enums.TaskType;
-import enums.TaskStatus;
-import enums.OutputSymbol;
 
 /**
  * Represents a todo task with a description.

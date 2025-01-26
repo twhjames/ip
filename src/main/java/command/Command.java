@@ -3,7 +3,7 @@ package command;
 import enums.CommandType;
 import enums.ExecutionStatus;
 import exception.HelixException;
-import util.TaskList;
+import task.TaskList;
 
 /**
  * Abstract base class representing a generic command.
