@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Represents various output symbols used for display purposes.
+ */
 public enum OutputSymbol {
     CHECKMARK("✔"),
     WARNING("⚠️"),
@@ -19,10 +22,20 @@ public enum OutputSymbol {
 
     private final String symbol;
 
+    /**
+     * Constructs an OutputSymbol with the specified symbol.
+     *
+     * @param symbol the symbol representation.
+     */
     OutputSymbol(String symbol) {
         this.symbol = symbol;
     }
 
+    /**
+     * Returns the symbol representation.
+     *
+     * @return the symbol.
+     */
     public String getSymbol() {
         return this.symbol;
     }
