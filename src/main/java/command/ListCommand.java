@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * A command to list all tasks in the TaskList.
+ * Inherits from the Command class.
  */
 public class ListCommand extends Command {
 

@@ -5,10 +5,12 @@ import enums.OutputSymbol;
 import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
+import task.Task;
 import task.TaskList;
 
 /**
  * A command to mark a task as not done in the TaskList.
+ * Inherits from the Command class.
  */
 public class UnmarkCommand extends Command {
     private final int taskIndex;
@@ -39,12 +41,13 @@ public class UnmarkCommand extends Command {
         String crossSymbol = OutputSymbol.CROSS.getSymbol();
 
         // Unmark the task as not done
-        if (taskList.getTask(taskIndex).isDone() != TaskStatus.COMPLETED) {
+        Task task = taskList.getTask(taskIndex);
+        if (task.getTaskStatus() != TaskStatus.COMPLETED) {
             System.out.println(helixSymbol + " [Helix] : This task is already not done!\n");
         } else {
-            taskList.getTask(taskIndex).markAsUndone();
+            taskList.markTaskAsUndone(taskIndex);
             System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
-            System.out.println("    " + taskList.getTask(taskIndex) + "\n");
+            System.out.println("    " + task + "\n");
         }
     }
 }

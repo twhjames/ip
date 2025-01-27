@@ -1,7 +1,6 @@
 package task;
 
 import enums.TaskType;
-import enums.OutputSymbol;
 
 /**
  * Represents an event task with a description, start time, and end time.
@@ -42,8 +41,7 @@ public class Event extends Task {
      */
     @Override
     public String getTaskDetails() {
-        String clockSymbol = OutputSymbol.CLOCK.getSymbol();
-        return clockSymbol + " From: " + this.from + "\n  " + clockSymbol + " To: " + this.to;
+        return this.from + " - " + this.to;
     }
 
     /**

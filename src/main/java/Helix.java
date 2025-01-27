@@ -3,8 +3,10 @@ import command.CommandFactory;
 import enums.OutputSymbol;
 import enums.ExecutionStatus;
 import exception.HelixException;
+import storage.Storage;
 import task.TaskList;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -14,9 +16,10 @@ public class Helix {
     public static void main(String[] args) {
 
         // initialise variables
-        TaskList taskList = new TaskList();
-        Scanner sc = new Scanner(System.in);
-        ExecutionStatus isExit = ExecutionStatus.CONTINUE;
+        TaskList taskList = null;
+        String filePath = "./data/helix_tasklist.txt";
+        Storage storage = new Storage(filePath);
+
         String logo = """
            ╔════════════════════════════════════════════════════════╗
            ║                                                        ║
@@ -31,6 +34,18 @@ public class Helix {
         String helixSymbol = OutputSymbol.HELIX.getSymbol();
         String userSymbol = OutputSymbol.USER.getSymbol();
         String warningSymbol = OutputSymbol.WARNING.getSymbol();
+
+        Scanner sc = new Scanner(System.in);
+        ExecutionStatus isExit = ExecutionStatus.CONTINUE;
+
+        // load task from storage
+        try {
+            taskList = new TaskList(storage);
+        } catch (IOException e) {
+            System.out.println(
+                    warningSymbol + " [Helix] : Failed to load tasks. Starting with an empty list."
+            );
+        }
 
         // print introduction message
         System.out.println(logo);

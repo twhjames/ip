@@ -7,6 +7,7 @@ import task.TaskList;
 
 /**
  * A command to terminate the application.
+ * Inherits from the Command class.
  */
 public class ExitCommand extends Command {
 
