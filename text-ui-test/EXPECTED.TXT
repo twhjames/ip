@@ -25,8 +25,8 @@ You now have 1 task(s) in your list.
 ════════════════════════════════════
   📋 Type: EVENT
   📝 Description: Team meeting
-  🕒 From: 2pm
-  🕒 To: 3pm
+  🕒 From: Oct 02 2019, 2:00 pm
+  🕒 To: Oct 02 2019, 4:00 pm
 
 You now have 2 task(s) in your list.
 ════════════════════════════════════
@@ -36,7 +36,7 @@ You now have 2 task(s) in your list.
 ════════════════════════════════════
   📋 Type: DEADLINE
   📝 Description: Submit assignment
-  📅 Due: 2025-01-30
+  📅 Due: Jan 30 2025, 5:00 pm
 
 You now have 3 task(s) in your list.
 ════════════════════════════════════
@@ -45,8 +45,8 @@ You now have 3 task(s) in your list.
 ════════════════════════════════════
 📝 Task List:
     1. [T][ ] Read a book
-    2. [E][ ] Team meeting (from: 2pm to: 3pm)
-    3. [D][ ] Submit assignment (by: 2025-01-30)
+    2. [E][ ] Team meeting (from: Oct 02 2019, 2:00 pm to: Oct 02 2019, 4:00 pm)
+    3. [D][ ] Submit assignment (by: Jan 30 2025, 5:00 pm)
 ════════════════════════════════════
 
 👤 [You]   : ✅ [Helix] : Task marked as complete!
@@ -70,8 +70,8 @@ You now have 2 task(s) in your list.
 ════════════════════════════════════
   📋 Type: EVENT
   📝 Description: Team meeting
-  🕒 From: 2pm
-  🕒 To: 3pm
+  🕒 From: Oct 02 2019, 2:00 pm
+  🕒 To: Oct 02 2019, 4:00 pm
   🛠️ Task Status: PENDING
 
 You now have 1 task(s) in your list.
@@ -82,7 +82,7 @@ You now have 1 task(s) in your list.
 ════════════════════════════════════
   📋 Type: DEADLINE
   📝 Description: Submit assignment
-  📅 Due: 2025-01-30
+  📅 Due: Jan 30 2025, 5:00 pm
   🛠️ Task Status: PENDING
 
 You now have 0 task(s) in your list.
