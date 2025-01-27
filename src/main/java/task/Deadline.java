@@ -1,7 +1,6 @@
 package task;
 
 import enums.TaskType;
-import enums.OutputSymbol;
 
 /**
  * Represents a deadline task with a description and a due date.
@@ -39,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskDetails() {
-        return OutputSymbol.CALENDAR.getSymbol() + " Due: " + this.duedate;
+        return this.duedate;
     }
 
     /**

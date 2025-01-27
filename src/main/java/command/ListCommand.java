@@ -2,13 +2,14 @@ package command;
 
 import enums.CommandType;
 import enums.OutputSymbol;
-import util.TaskList;
+import task.TaskList;
 import task.Task;
 
 import java.util.List;
 
 /**
  * A command to list all tasks in the TaskList.
+ * Inherits from the Command class.
  */
 public class ListCommand extends Command {
 

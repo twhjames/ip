@@ -10,30 +10,30 @@ import enums.OutputSymbol;
  */
 public abstract class Task {
     private final String description;
-    private TaskStatus isDone;
+    private TaskStatus taskStatus;
 
     /**
-     * Constructs a Task with the specified description.
+     * Constructs a Task with the specified description and pending task status.
      *
      * @param description the description of the task
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = TaskStatus.PENDING;
+        this.taskStatus = TaskStatus.PENDING;
     }
 
     /**
-     * Marks the task as done by setting the completion status to true.
+     * Marks the task as done by setting the completion status to COMPLETED.
      */
     public void markAsDone() {
-        this.isDone = TaskStatus.COMPLETED;
+        this.taskStatus = TaskStatus.COMPLETED;
     }
 
     /**
-     * Marks the task as not done by setting the completion status to false.
+     * Marks the task as not done by setting the completion status to PENDING.
      */
     public void markAsUndone() {
-        this.isDone = TaskStatus.PENDING;
+        this.taskStatus = TaskStatus.PENDING;
     }
 
     /**
@@ -46,12 +46,12 @@ public abstract class Task {
     }
 
     /**
-     * Checks if the task is marked as done.
+     * Checks the task status, i.e. if the task is marked as done.
      *
      * @return the status of the task (PENDING or COMPLETED)
      */
-    public TaskStatus isDone() {
-        return this.isDone;
+    public TaskStatus getTaskStatus() {
+        return this.taskStatus;
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String outputSymbol = (this.isDone == TaskStatus.COMPLETED)
+        String outputSymbol = (this.taskStatus == TaskStatus.COMPLETED)
                 ? OutputSymbol.CHECKMARK.getSymbol() : " ";
         return "[" + outputSymbol + "] " + description;
     }

@@ -3,10 +3,11 @@ package command;
 import enums.CommandType;
 import enums.ExecutionStatus;
 import enums.OutputSymbol;
-import util.TaskList;
+import task.TaskList;
 
 /**
  * A command to terminate the application.
+ * Inherits from the Command class.
  */
 public class ExitCommand extends Command {
 

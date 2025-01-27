@@ -1,18 +1,18 @@
 package command;
 
-import enums.TaskStatus;
-import enums.TaskType;
 import enums.OutputSymbol;
 import enums.CommandType;
 
+import enums.TaskType;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 
 import task.Task;
-import util.TaskList;
+import task.TaskList;
 
 /**
  * A command to delete a task from the task list.
+ * Inherits from the Command class.
  */
 public class DeleteCommand extends Command {
     private final int taskIndex;
@@ -41,8 +41,8 @@ public class DeleteCommand extends Command {
 
         // Remove the task and notify the user
         Task task = taskList.removeTask(taskIndex);
-        String taskType = task.getTaskType().name();
-        String isDone = task.isDone().name();
+        TaskType taskType = task.getTaskType();
+        String taskStatus = task.getTaskStatus().name();
         String taskDescription = task.getDescription();
         String taskDetails = task.getTaskDetails();
 
@@ -51,16 +51,23 @@ public class DeleteCommand extends Command {
         String typeSymbol = OutputSymbol.CLIPBOARD.getSymbol();
         String descriptionSymbol = OutputSymbol.NOTE.getSymbol();
         String completedSymbol = OutputSymbol.WRENCH.getSymbol();
+        String calendarSymbol = OutputSymbol.CALENDAR.getSymbol();
+        String clockSymbol = OutputSymbol.CLOCK.getSymbol();
 
         System.out.println("════════════════════════════════════");
         System.out.println(removedSymbol + "  Task Removed!");
         System.out.println("════════════════════════════════════");
-        System.out.println("  " + typeSymbol + " Type: " + taskType);
+        System.out.println("  " + typeSymbol + " Type: " + taskType.name());
         System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
-        if (!taskDetails.isEmpty()) {
-            System.out.println("  " + taskDetails);
+        if (taskType == TaskType.DEADLINE) {
+            System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
+        } else if (taskType == TaskType.EVENT) {
+            String[] parts = taskDetails.split(" - ");
+            String from = parts[0];
+            String to = parts[1];
+            System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
         }
-        System.out.println("  " + completedSymbol + " Task Status: " + isDone);
+        System.out.println("  " + completedSymbol + " Task Status: " + taskStatus);
         System.out.println("\nYou now have " + taskList.getTaskCount() + " task(s) in your list.");
         System.out.println("════════════════════════════════════\n");
     }
