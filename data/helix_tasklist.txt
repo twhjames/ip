@@ -1,3 +1,0 @@
-TODO | COMPLETED | Read a book
-EVENT | PENDING | Team meeting | 2pm - 3pm
-DEADLINE | PENDING | Submit assignment | 2025-01-30

@@ -5,6 +5,7 @@ import enums.TaskType;
 
 import exception.HelixException;
 import exception.InvalidCommandException;
+import exception.InvalidDateFormatException;
 import exception.MissingArgumentException;
 import exception.TooManyArgumentsException;
 import exception.InvalidNumberFormatException;
@@ -87,13 +88,19 @@ public class CommandFactory {
             );
         }
         String[] details = args.split(" /by ", 2);
-        if (details.length != 2 || details[1].split(" ").length > 1) {
+        if (details.length != 2 || details[1].split(" ").length > 2) {
             throw new TooManyArgumentsException(
                     TaskType.DEADLINE.name().toLowerCase(Locale.ROOT),
                     "deadline <description> /by <due date>"
             );
         }
-        return new AddCommand(CommandType.DEADLINE, new Deadline(details[0].trim(), details[1].trim()));
+        try {
+            return new AddCommand(CommandType.DEADLINE, new Deadline(details[0].trim(), details[1].trim()));
+        } catch (IllegalArgumentException e) {
+            throw new InvalidDateFormatException(
+                    "Invalid date format. Please use 'd/M/yyyy HHmm' or 'yyyy-MM-dd HHmm'."
+            );
+        }
     }
 
     /**
@@ -105,23 +112,42 @@ public class CommandFactory {
      * @return a {@link Command} instance for adding an {@link Event} task
      * @throws MissingArgumentException if the arguments are missing or improperly formatted
      * @throws TooManyArgumentsException if the command contains too many arguments
+     * @throws InvalidDateFormatException if the date format is invalid
      */
     private static Command createEventCommand(String args) throws HelixException {
+        // Ensure the input contains valid format markers
         if (!args.contains(" /from ") || !args.contains(" /to ")) {
             throw new MissingArgumentException(
                     TaskType.EVENT.name().toLowerCase(Locale.ROOT),
-                    "event <description> /from <start time> /to <end time>"
+                    "event <description> /from <start date/time> /to <end date/time>"
             );
         }
-        String[] details = args.split(" /from ", 2);
-        String[] times = details[1].split(" /to ", 2);
-        if (details.length != 2 || times.length != 2 || times[1].split(" ").length > 1) {
-            throw new TooManyArgumentsException(
-                    TaskType.EVENT.name().toLowerCase(Locale.ROOT),
-                    "event <description> /from <start time> /to <end time>"
+
+        try {
+            // Extract description and date/time details
+            String[] parts = args.split(" /from ", 2);
+            String description = parts[0].trim();
+            String[] dateTimes = parts[1].split(" /to ", 2);
+
+            // Ensure start and end date/times are present
+            if (dateTimes.length < 2 || dateTimes[0].isBlank() || dateTimes[1].isBlank()) {
+                throw new MissingArgumentException(
+                        TaskType.EVENT.name().toLowerCase(Locale.ROOT),
+                        "event <description> /from <start date/time> /to <end date/time>"
+                );
+            }
+
+            return new AddCommand(
+                    CommandType.EVENT,
+                    new Event(description, dateTimes[0].trim(), dateTimes[1].trim())
+            );
+        } catch (IllegalArgumentException e) {
+            throw new InvalidDateFormatException(
+                    "Invalid date format. Supported formats:\n" +
+                            "1. d/M/yyyy HHmm\n" +
+                            "2. yyyy-MM-dd HHmm."
             );
         }
-        return new AddCommand(CommandType.EVENT, new Event(details[0].trim(), times[0].trim(), times[1].trim()));
     }
 
     /**
