@@ -1,13 +1,13 @@
-### Helix Chatbot: Your Personal Task Manager
+### helix.Helix Chatbot: Your Personal Task Manager
 
-Helix is a simple, intuitive, and interactive chatbot designed to help you manage your tasks efficiently. Whether you're adding to-dos, setting deadlines, or planning events, Helix is here to assist you every step of the way.
+helix.Helix is a simple, intuitive, and interactive chatbot designed to help you manage your tasks efficiently. Whether you're adding to-dos, setting deadlines, or planning events, helix.Helix is here to assist you every step of the way.
 
 ---
 
 ## Features
 
 1. **Task Management**:
-   - Add tasks to your task list (To-Dos, Deadlines, Events).
+   - Add tasks to your helix.task list (To-Dos, Deadlines, Events).
    - Mark tasks as completed or unmark them.
    - Delete tasks when no longer needed.
 
@@ -40,24 +40,24 @@ More features pending.
    ```
 4. Run the chatbot:
    ```bash
-   java -cp bin Helix
+   java -cp bin helix.Helix
    ```
 
 ---
 
 ## Usage
 
-Here are the commands you can use with Helix:
+Here are the commands you can use with helix.Helix:
 
 | Command       | Description                                                                 |
 |---------------|-----------------------------------------------------------------------------|
-| `todo <description>` | Adds a simple to-do task. Example: `todo Read a book`                   |
-| `deadline <description> /by <due date>` | Adds a task with a deadline. Example: `deadline Submit report /by 2025-01-30` |
-| `event <description> /from <start time> /to <end time>` | Adds an event task. Example: `event Team meeting /from 10am /to 12pm` |
+| `todo <description>` | Adds a simple to-do helix.task. Example: `todo Read a book`                   |
+| `deadline <description> /by <due date>` | Adds a helix.task with a deadline. Example: `deadline Submit report /by 2025-01-30` |
+| `event <description> /from <start time> /to <end time>` | Adds an event helix.task. Example: `event Team meeting /from 10am /to 12pm` |
 | `list`        | Displays all the tasks in your list.                                        |
-| `mark <task number>` | Marks the specified task as done. Example: `mark 1`                      |
-| `unmark <task number>` | Marks the specified task as not done. Example: `unmark 1`              |
-| `delete <task number>` | Deletes the specified task. Example: `delete 1`                       |
+| `mark <helix.task number>` | Marks the specified helix.task as done. Example: `mark 1`                      |
+| `unmark <helix.task number>` | Marks the specified helix.task as not done. Example: `unmark 1`              |
+| `delete <helix.task number>` | Deletes the specified helix.task. Example: `delete 1`                       |
 | `bye`         | Exits the chatbot.                                                         |
 
 ---
@@ -66,7 +66,7 @@ Here are the commands you can use with Helix:
 
 ```
 src/
-├── command/
+├── helix.command/
 │   ├── AddCommand.java
 │   ├── Command.java
 │   ├── CommandFactory.java
@@ -75,27 +75,27 @@ src/
 │   ├── ListCommand.java
 │   ├── MarkCommand.java
 │   ├── UnmarkCommand.java
-├── enums/
+├── helix.enums/
 │   ├── CommandType.java
 │   ├── ExecutionStatus.java
 │   ├── OutputSymbol.java
 │   ├── TaskStatus.java
 │   └── TaskType.java
-├── exception/
+├── helix.exception/
 │   ├── HelixException.java
 │   ├── InvalidCommandException.java
 │   ├── InvalidNumberFormatException.java
 │   ├── MissingArgumentException.java
 │   ├── TaskIndexOutOfBoundsException.java
 │   └── TooManyArgumentsException.java
-├── task/
+├── helix.task/
 │   ├── Deadline.java
 │   ├── Event.java
 │   ├── Task.java
 │   ├── Todo.java
 ├── util/
 │   └── TaskList.java
-└── Helix.java
+└── helix.Helix.java
 ```
 
 ---
@@ -113,8 +113,8 @@ src/
 ║                                                        ║
 ╚════════════════════════════════════════════════════════╝
 
-🤖 [Helix] : Hello! I'm your personal assistant, Helix.
-🤖 [Helix] : What can I do for you today?
+🤖 [helix.Helix] : Hello! I'm your personal assistant, helix.Helix.
+🤖 [helix.Helix] : What can I do for you today?
 
 👤 [You]   : todo Read a book
 ════════════════════════════════════
@@ -123,7 +123,7 @@ src/
   📋 Type: TODO
   📝 Description: Read a book
 
-You now have 1 task(s) in your list.
+You now have 1 helix.task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : event Team meeting /from 2pm /to 3pm
@@ -135,7 +135,7 @@ You now have 1 task(s) in your list.
   🕒 From: 2pm
   🕒 To: 3pm
 
-You now have 2 task(s) in your list.
+You now have 2 helix.task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : deadline Submit assignment /by 2025-01-30
@@ -146,11 +146,11 @@ You now have 2 task(s) in your list.
   📝 Description: Submit assignment
   📅 Due: 2025-01-30
 
-You now have 3 task(s) in your list.
+You now have 3 helix.task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : list
-🤖 [Helix] : Listing tasks...
+🤖 [helix.Helix] : Listing tasks...
 ════════════════════════════════════
 📝 Task List:
     1. [T][ ] Read a book
@@ -159,11 +159,11 @@ You now have 3 task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : mark 1
-✅ [Helix] : Task marked as complete!
+✅ [helix.Helix] : Task marked as complete!
     [T][✔] Read a book
 
 👤 [You]   : unmark 1
-❌ [Helix] : Task marked as incomplete!
+❌ [helix.Helix] : Task marked as incomplete!
     [T][ ] Read a book
 
 👤 [You]   : delete 1
@@ -174,12 +174,12 @@ You now have 3 task(s) in your list.
   📝 Description: Read a book
   🛠️ Task Status: PENDING
 
-You now have 2 task(s) in your list.
+You now have 2 helix.task(s) in your list.
 ════════════════════════════════════
 
 👤 [You]   : bye
-🤖 [Helix] : Bye! Hope to see you soon! 👋
+🤖 [helix.Helix] : Bye! Hope to see you soon! 👋
 =========================================================
-✨ Thank you for using Helix. Have a great day! ✨
+✨ Thank you for using helix.Helix. Have a great day! ✨
 =========================================================
 ```
