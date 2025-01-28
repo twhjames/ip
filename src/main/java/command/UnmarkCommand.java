@@ -1,12 +1,12 @@
 package command;
 
 import enums.CommandType;
-import enums.OutputSymbol;
 import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command to mark a task as not done in the TaskList.
@@ -29,25 +29,24 @@ public class UnmarkCommand extends Command {
      * Executes the unmark command, marking the specified task as not done.
      *
      * @param taskList the TaskList containing the task to be updated
+     * @param ui the Ui component used to display messages to the user
      * @throws HelixException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList) throws HelixException {
+    public void execute(TaskList taskList, Ui ui) throws HelixException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
-        String helixSymbol = OutputSymbol.HELIX.getSymbol();
-        String crossSymbol = OutputSymbol.CROSS.getSymbol();
-
-        // Unmark the task as not done
+        // get the task
         Task task = taskList.getTask(taskIndex);
+
+        // handle task status and notify via Ui
         if (task.getTaskStatus() != TaskStatus.COMPLETED) {
-            System.out.println(helixSymbol + " [Helix] : This task is already not done!\n");
+            ui.showTaskAlreadyPending();
         } else {
-            taskList.markTaskAsUndone(taskIndex);
-            System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
-            System.out.println("    " + task + "\n");
+            taskList.markTaskAsUndone(taskIndex, ui);
+            ui.showTaskMarkedPending(task);
         }
     }
 }

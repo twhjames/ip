@@ -2,8 +2,8 @@ package command;
 
 import enums.CommandType;
 import enums.ExecutionStatus;
-import enums.OutputSymbol;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command to terminate the application.
@@ -22,25 +22,11 @@ public class ExitCommand extends Command {
      * Executes the exit command, displaying a farewell message.
      *
      * @param taskList the TaskList (unused in this implementation)
+     * @param ui the Ui component used to display messages to the user
      */
     @Override
-    public void execute(TaskList taskList) {
-        String helixSymbol = OutputSymbol.HELIX.getSymbol();
-        String handwaveSymbol = OutputSymbol.HANDWAVE.getSymbol();
-        String sparkleSymbol = OutputSymbol.SPARKLE.getSymbol();
-
-        System.out.println(
-                helixSymbol +
-                " [Helix] : Bye! Hope to see you soon! " +
-                handwaveSymbol
-        );
-        System.out.println("=========================================================");
-        System.out.println(
-                sparkleSymbol +
-                " Thank you for using Helix. Have a great day! " +
-                sparkleSymbol
-        );
-        System.out.println("=========================================================");
+    public void execute(TaskList taskList, Ui ui) {
+        ui.showExit();
     }
 
     /**

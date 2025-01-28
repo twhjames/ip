@@ -4,6 +4,7 @@ import enums.CommandType;
 import enums.ExecutionStatus;
 import exception.HelixException;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * Abstract base class representing a generic command.
@@ -35,9 +36,10 @@ public abstract class Command {
      * Executes the command on the specified TaskList.
      *
      * @param taskList the TaskList on which the command will operate
+     * @param ui the Ui component used to display messages to the user
      * @throws HelixException if the command fails
      */
-    public abstract void execute(TaskList taskList) throws HelixException;
+    public abstract void execute(TaskList taskList, Ui ui) throws HelixException;
 
     /**
      * Determines whether the application should continue or terminate after executing the command.

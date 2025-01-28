@@ -2,6 +2,8 @@ package task;
 
 import enums.OutputSymbol;
 import storage.Storage;
+import ui.Ui;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -29,23 +31,25 @@ public class TaskList {
     /**
      * Adds a new task to the TaskList and updates the storage.
      *
-     * @param task the task to be added
+     * @param task the {@link Task} to be added
+     * @param ui the {@link Ui} component used to display messages to the user
      */
-    public void addTask(Task task) {
+    public void addTask(Task task, Ui ui) {
         this.tasks.add(task);
-        updateStorage();
+        updateStorage(ui);
     }
 
     /**
      * Removes a task from the TaskList by its index and updates the storage.
      *
      * @param taskIndex the index of the task to be removed (0-based index)
-     * @return the task that was removed
-     * @throws IndexOutOfBoundsException if the taskIndex is out of range
+     * @param ui the {@link Ui} component used to display messages to the user
+     * @return the {@link Task} that was removed
+     * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public Task removeTask(int taskIndex) {
+    public Task removeTask(int taskIndex, Ui ui) {
         Task task = this.tasks.remove(taskIndex);
-        updateStorage();
+        updateStorage(ui);
         return task;
     }
 
@@ -53,24 +57,26 @@ public class TaskList {
      * Marks a task as done based on its index and updates the storage.
      *
      * @param taskIndex the index of the task to mark as done (0-based index)
-     * @throws IndexOutOfBoundsException if the taskIndex is out of range
+     * @param ui the {@link Ui} component used to display messages to the user
+     * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public void markTaskAsDone(int taskIndex) {
+    public void markTaskAsDone(int taskIndex, Ui ui) {
         Task task = this.tasks.get(taskIndex);
         task.markAsDone();
-        updateStorage();
+        updateStorage(ui);
     }
 
     /**
      * Marks a task as not done based on its index and updates the storage.
      *
      * @param taskIndex the index of the task to mark as not done (0-based index)
-     * @throws IndexOutOfBoundsException if the taskIndex is out of range
+     * @param ui the {@link Ui} component used to display messages to the user
+     * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public void markTaskAsUndone(int taskIndex) {
+    public void markTaskAsUndone(int taskIndex, Ui ui) {
         Task task = this.tasks.get(taskIndex);
         task.markAsUndone();
-        updateStorage();
+        updateStorage(ui);
     }
 
     /**
@@ -104,13 +110,15 @@ public class TaskList {
 
     /**
      * Updates the current state of the tasks to the storage. If saving fails, logs a warning message.
+     *
+     * @param ui the {@link Ui} component used to display messages to the user
      */
-    private void updateStorage() {
+    private void updateStorage(Ui ui) {
         try {
             storage.save(tasks);
         } catch (IOException e) {
             String warningSymbol = OutputSymbol.WARNING.getSymbol();
-            System.out.println(warningSymbol + " [Helix] : Failed to save tasks: " + e.getMessage());
+            ui.showSavingStorageError(e.getMessage());
         }
     }
 }

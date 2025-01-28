@@ -1,12 +1,12 @@
 package command;
 
 import enums.CommandType;
-import enums.OutputSymbol;
 import enums.TaskStatus;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command to mark a task as done in the TaskList.
@@ -29,25 +29,24 @@ public class MarkCommand extends Command {
      * Executes the mark command, marking the specified task as done.
      *
      * @param taskList the TaskList containing the task to be updated
+     * @param ui the Ui component used to display messages to the user
      * @throws HelixException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList) throws HelixException {
+    public void execute(TaskList taskList, Ui ui) throws HelixException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
-        String helixSymbol = OutputSymbol.HELIX.getSymbol();
-        String checkSymbol = OutputSymbol.CHECK.getSymbol();
-
-        // Mark the task as done
+        // get the task
         Task task = taskList.getTask(taskIndex);
+
+        // handle task status and notify via Ui
         if (task.getTaskStatus() == TaskStatus.COMPLETED) {
-            System.out.println(helixSymbol + " [Helix] : This task is already marked as done!\n");
+            ui.showTaskAlreadyCompleted();
         } else {
-            taskList.markTaskAsDone(taskIndex);
-            System.out.println(checkSymbol + " [Helix] : Task marked as complete!");
-            System.out.println("    " + task + "\n");
+            taskList.markTaskAsDone(taskIndex, ui);
+            ui.showTaskMarkedComplete(task);
         }
     }
 }
