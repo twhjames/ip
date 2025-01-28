@@ -1,17 +1,18 @@
 package storage;
 
-import helix.storage.Storage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import helix.task.Task;
-import helix.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import helix.storage.Storage;
+import helix.task.Task;
+import helix.task.Todo;
 
 public class StorageTest {
 

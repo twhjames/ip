@@ -1,17 +1,17 @@
 package helix;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 import helix.command.Command;
 import helix.command.CommandFactory;
-import helix.enums.FilePath;
 import helix.enums.ExecutionStatus;
+import helix.enums.FilePath;
 import helix.exception.HelixException;
 import helix.storage.Storage;
 import helix.task.TaskList;
 import helix.ui.Ui;
-
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * The main class for the Helix personal assistant application.

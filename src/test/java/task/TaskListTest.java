@@ -1,16 +1,17 @@
 package task;
 
-import helix.task.Task;
-import helix.task.TaskList;
-import helix.task.Todo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import helix.ui.Ui;
-import stub.StubStorage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import helix.task.Task;
+import helix.task.TaskList;
+import helix.task.Todo;
+import helix.ui.Ui;
+import stub.StubStorage;
 
 public class TaskListTest {
     private TaskList taskList;

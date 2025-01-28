@@ -1,10 +1,10 @@
 package stub;
 
-import helix.storage.Storage;
-import helix.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import helix.storage.Storage;
+import helix.task.Task;
 
 public class StubStorage extends Storage {
     public StubStorage() {

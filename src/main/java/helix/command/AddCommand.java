@@ -1,8 +1,8 @@
 package helix.command;
 
 import helix.enums.CommandType;
-import helix.task.TaskList;
 import helix.task.Task;
+import helix.task.TaskList;
 import helix.ui.Ui;
 
 /**

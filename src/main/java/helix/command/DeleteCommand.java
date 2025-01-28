@@ -1,10 +1,8 @@
 package helix.command;
 
 import helix.enums.CommandType;
-
 import helix.exception.HelixException;
 import helix.exception.TaskIndexOutOfBoundsException;
-
 import helix.task.Task;
 import helix.task.TaskList;
 import helix.ui.Ui;
