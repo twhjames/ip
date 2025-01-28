@@ -48,6 +48,7 @@ public class CommandFactory {
             case UNMARK -> createUnmarkCommand(args);
             case DELETE -> createDeleteCommand(args);
             case BYE -> createExitCommand(args);
+            case FIND -> createFindCommand(args);
         };
     }
 
@@ -275,5 +276,19 @@ public class CommandFactory {
             );
         }
         return new DeleteCommand(Integer.parseInt(args) - 1);
+    }
+
+    /**
+     * Creates a FindCommand instance after validating arguments.
+     *
+     * @param args the arguments for the find command
+     * @return a FindCommand instance
+     * @throws MissingArgumentException if the keyword is missing
+     */
+    private static Command createFindCommand(String args) throws HelixException {
+        if (args.isEmpty()) {
+            throw new MissingArgumentException("find", "find <keyword>");
+        }
+        return new FindCommand(args);
     }
 }

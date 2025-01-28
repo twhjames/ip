@@ -42,5 +42,10 @@ public enum CommandType {
     /**
      * Command to exit the program.
      */
-    BYE;
+    BYE,
+
+    /**
+     * Command to find tasks based on a keyword in their description.
+     */
+    FIND;
 }
