@@ -245,4 +245,23 @@ public class Ui {
         System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
         System.out.println("    " + task + "\n");
     }
+
+    /**
+     * Displays the matching tasks found in the task list.
+     *
+     * @param matchingTasks the list of tasks that match the search keyword
+     */
+    public void showMatchingTasks(List<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println(helixSymbol + " [Helix] : No matching tasks found!");
+        } else {
+            showLine();
+            System.out.println(helixSymbol + " [Helix] : Tasks with matching keywords...");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.printf("    %d. %s%n", i + 1, matchingTasks.get(i));
+            }
+            showLine();
+        }
+        System.out.println();
+    }
 }
