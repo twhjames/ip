@@ -1,10 +1,10 @@
 package helix.task;
 
-import helix.enums.TaskType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import helix.enums.TaskType;
 
 /**
  * Represents a deadline helix.task with a description and a due date.

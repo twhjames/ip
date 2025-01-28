@@ -1,8 +1,5 @@
 package stub;
 
-import helix.storage.Storage;
-import helix.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,9 @@ import java.util.List;
  * on the file system, thereby reducing external dependencies and increasing test reliability.
  * </p>
  */
+import helix.storage.Storage;
+import helix.task.Task;
+
 public class StubStorage extends Storage {
 
     /**

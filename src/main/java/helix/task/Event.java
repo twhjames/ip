@@ -1,10 +1,10 @@
 package helix.task;
 
-import helix.enums.TaskType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import helix.enums.TaskType;
 
 /**
  * Represents an event helix.task with a description, start time, and end time.

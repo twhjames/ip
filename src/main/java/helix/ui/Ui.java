@@ -1,11 +1,11 @@
 package helix.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import helix.enums.OutputSymbol;
 import helix.enums.TaskType;
 import helix.task.Task;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Handles all user interaction for the helix.Helix application.
