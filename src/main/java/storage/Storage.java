@@ -23,11 +23,12 @@ public class Storage {
 
     /**
      * Constructs a {@code Storage} object with the specified file path.
+     * Ensures the file path always resolves to the `data` directory in the project root.
      *
-     * @param filePath the relative or absolute path to the storage file
+     * @param filePath the relative path to the storage file
      */
     public Storage(String filePath) {
-        this.filePath = Paths.get(filePath);
+        this.filePath = Paths.get(filePath).normalize();
     }
 
     /**

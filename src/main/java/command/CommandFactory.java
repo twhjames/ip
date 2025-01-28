@@ -22,14 +22,14 @@ import java.util.Locale;
 public class CommandFactory {
 
     /**
-     * Creates a {@link Command} based on the given input.
+     * Parses user input and creates a {@link Command} based on the given input.
      *
      * @param input the user input specifying the type of command
      * @return a {@link Command} instance corresponding to the input
      * @throws InvalidCommandException if the input command type is invalid
      * @throws HelixException if the command is invalid or contains improper arguments
      */
-    public static Command createCommand(String input) throws HelixException {
+    public static Command parseCommand(String input) throws HelixException {
         String[] parts = input.trim().split(" ", 2);
         String command = parts[0].toUpperCase(Locale.ROOT);
         String args = parts.length > 1 ? parts[1].trim() : "";

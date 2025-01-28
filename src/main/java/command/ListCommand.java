@@ -1,9 +1,9 @@
 package command;
 
 import enums.CommandType;
-import enums.OutputSymbol;
 import task.TaskList;
 import task.Task;
+import ui.Ui;
 
 import java.util.List;
 
@@ -24,27 +24,13 @@ public class ListCommand extends Command {
      * Executes the list command, printing all tasks in the TaskList.
      *
      * @param taskList the TaskList containing tasks to be listed
+     * @param ui the Ui component used to display messages to the user
      */
     @Override
-    public void execute(TaskList taskList) {
-
-        String helixSymbol = OutputSymbol.HELIX.getSymbol();
-        String noteSymbol = OutputSymbol.NOTE.getSymbol();
-
-        System.out.println(helixSymbol + " [Helix] : Listing tasks...");
-        System.out.println("════════════════════════════════════");
-        System.out.println(noteSymbol + " Task List:");
-
+    public void execute(TaskList taskList, Ui ui) {
+        // get unmodifiable list of tasks and pass it to Ui
         List<Task> tasks = taskList.getTasks();
-        if (tasks.isEmpty()) {
-            System.out.println("There's no pending tasks.");
-            System.out.println("════════════════════════════════════\n");
-            return;
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("    %d. %s%n", i + 1, tasks.get(i));
-        }
-        System.out.println("════════════════════════════════════\n");
+        ui.showTaskList(tasks);
     }
 }
 

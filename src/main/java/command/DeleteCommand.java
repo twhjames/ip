@@ -1,14 +1,13 @@
 package command;
 
-import enums.OutputSymbol;
 import enums.CommandType;
 
-import enums.TaskType;
 import exception.HelixException;
 import exception.TaskIndexOutOfBoundsException;
 
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command to delete a task from the task list.
@@ -31,44 +30,18 @@ public class DeleteCommand extends Command {
      * Executes the delete command by removing the task from the task list.
      *
      * @param taskList the task list from which the task will be removed
+     * @param ui the Ui component used to display messages to the user
      * @throws TaskIndexOutOfBoundsException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList) throws HelixException {
+    public void execute(TaskList taskList, Ui ui) throws HelixException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
         // Remove the task and notify the user
-        Task task = taskList.removeTask(taskIndex);
-        TaskType taskType = task.getTaskType();
-        String taskStatus = task.getTaskStatus().name();
-        String taskDescription = task.getDescription();
-        String taskDetails = task.getTaskDetails();
+        Task task = taskList.removeTask(taskIndex, ui);
+        ui.showTaskRemoved(task, taskList.getTaskCount());
 
-        // Output symbols for formatting
-        String removedSymbol = OutputSymbol.BIN.getSymbol();
-        String typeSymbol = OutputSymbol.CLIPBOARD.getSymbol();
-        String descriptionSymbol = OutputSymbol.NOTE.getSymbol();
-        String completedSymbol = OutputSymbol.WRENCH.getSymbol();
-        String calendarSymbol = OutputSymbol.CALENDAR.getSymbol();
-        String clockSymbol = OutputSymbol.CLOCK.getSymbol();
-
-        System.out.println("════════════════════════════════════");
-        System.out.println(removedSymbol + "  Task Removed!");
-        System.out.println("════════════════════════════════════");
-        System.out.println("  " + typeSymbol + " Type: " + taskType.name());
-        System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
-        if (taskType == TaskType.DEADLINE) {
-            System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
-        } else if (taskType == TaskType.EVENT) {
-            String[] parts = taskDetails.split(" - ");
-            String from = parts[0];
-            String to = parts[1];
-            System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
-        }
-        System.out.println("  " + completedSymbol + " Task Status: " + taskStatus);
-        System.out.println("\nYou now have " + taskList.getTaskCount() + " task(s) in your list.");
-        System.out.println("════════════════════════════════════\n");
     }
 }

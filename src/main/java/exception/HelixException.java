@@ -22,6 +22,6 @@ public abstract class HelixException extends Exception {
      * @return a formatted string with the exception message
      */
     public String getFormattedMessage() {
-        return OutputSymbol.WARNING.getSymbol() + "️ [Helix] : " + getMessage() + "\n";
+        return getMessage();
     }
 }
