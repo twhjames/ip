@@ -1,4 +1,4 @@
-package task;
+package helix.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,15 +7,8 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import helix.task.Task;
-import helix.task.TaskList;
-import helix.task.Todo;
+import helix.stub.StubStorage;
 import helix.ui.Ui;
-import stub.StubStorage;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the {@link TaskList} class.

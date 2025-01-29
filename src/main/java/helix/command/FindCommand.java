@@ -1,12 +1,12 @@
 package helix.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import helix.enums.CommandType;
 import helix.task.Task;
 import helix.task.TaskList;
 import helix.ui.Ui;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * A command to find tasks that match a keyword in their description.

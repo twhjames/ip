@@ -1,4 +1,4 @@
-package storage;
+package helix.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import helix.storage.Storage;
 import helix.task.Task;
 import helix.task.Todo;
 

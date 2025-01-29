@@ -19,7 +19,7 @@ public class TooManyArgumentsException extends HelixException {
      * @param exampleFormat an example of the correct helix.command format
      */
     public TooManyArgumentsException(String command, String exampleFormat) {
-        super("The helix.command '" + command + "' received too many arguments. " +
-                "Example: " + exampleFormat);
+        super("The helix.command '" + command + "' received too many arguments. "
+                + "Example: " + exampleFormat);
     }
 }

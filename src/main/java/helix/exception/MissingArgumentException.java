@@ -13,7 +13,7 @@ public class MissingArgumentException extends HelixException {
      * @param exampleFormat an example format showing the correct syntax for the helix.command
      */
     public MissingArgumentException(String command, String exampleFormat) {
-        super("The helix.command '" + command + "' requires additional arguments. " +
-                "Example: " + exampleFormat);
+        super("The helix.command '" + command + "' requires additional arguments. "
+                + "Example: " + exampleFormat);
     }
 }

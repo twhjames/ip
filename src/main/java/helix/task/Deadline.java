@@ -12,14 +12,14 @@ import helix.enums.TaskType;
  */
 public class Deadline extends Task {
 
-    private final LocalDateTime dueDate;
-
     private static final DateTimeFormatter[] INPUT_FORMATTERS = {
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // Format: 2/12/2019 1800
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),     // Format: 2019-10-15 1800
-            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")  // Format: Oct 11 2019, 5:00 pm
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // Format: 2/12/2019 1800
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // Format: 2019-10-15 1800
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a") // Format: Oct 11 2019, 5:00 pm
     };
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+
+    private final LocalDateTime dueDate;
 
     /**
      * Constructs a Deadline helix.task.

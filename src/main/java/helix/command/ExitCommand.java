@@ -39,4 +39,3 @@ public class ExitCommand extends Command {
         return ExecutionStatus.EXIT;
     }
 }
-

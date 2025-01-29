@@ -67,15 +67,15 @@ public class Ui {
      */
     public void showExit() {
         System.out.println(
-                helixSymbol +
-                        " [Helix] : Bye! Hope to see you soon! " +
-                        handwaveSymbol
+                helixSymbol
+                    + " [Helix] : Bye! Hope to see you soon! "
+                    + handwaveSymbol
         );
         System.out.println("=========================================================");
         System.out.println(
-                sparkleSymbol +
-                        " Thank you for using  Have a great day! " +
-                        sparkleSymbol
+                sparkleSymbol
+                    + " Thank you for using  Have a great day! "
+                    + sparkleSymbol
         );
         System.out.println("=========================================================");
     }
@@ -143,8 +143,8 @@ public class Ui {
         System.out.println(folderSymbol + "  Task Added!");
         showLine();
 
-        System.out.println("  " + clipboardSymbol +" Type: " + taskType.name());
-        System.out.println("  " + noteSymbol +" Description: " + taskDescription);
+        System.out.println("  " + clipboardSymbol + " Type: " + taskType.name());
+        System.out.println("  " + noteSymbol + " Description: " + taskDescription);
         if (taskType == TaskType.DEADLINE) {
             System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
         } else if (taskType == TaskType.EVENT) {

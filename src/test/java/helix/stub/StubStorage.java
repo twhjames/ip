@@ -1,7 +1,10 @@
-package stub;
+package helix.stub;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import helix.storage.Storage;
+import helix.task.Task;
 
 /**
  * A stub implementation of the {@link Storage} class for unit testing purposes.
@@ -11,9 +14,6 @@ import java.util.List;
  * on the file system, thereby reducing external dependencies and increasing test reliability.
  * </p>
  */
-import helix.storage.Storage;
-import helix.task.Task;
-
 public class StubStorage extends Storage {
 
     /**

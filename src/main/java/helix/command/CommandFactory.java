@@ -40,15 +40,15 @@ public class CommandFactory {
         }
 
         return switch (commandType) {
-            case TODO -> createTodoCommand(args);
-            case DEADLINE -> createDeadlineCommand(args);
-            case EVENT -> createEventCommand(args);
-            case LIST -> createListCommand(args);
-            case MARK -> createMarkCommand(args);
-            case UNMARK -> createUnmarkCommand(args);
-            case DELETE -> createDeleteCommand(args);
-            case BYE -> createExitCommand(args);
-            case FIND -> createFindCommand(args);
+        case TODO -> createTodoCommand(args);
+        case DEADLINE -> createDeadlineCommand(args);
+        case EVENT -> createEventCommand(args);
+        case LIST -> createListCommand(args);
+        case MARK -> createMarkCommand(args);
+        case UNMARK -> createUnmarkCommand(args);
+        case DELETE -> createDeleteCommand(args);
+        case BYE -> createExitCommand(args);
+        case FIND -> createFindCommand(args);
         };
     }
 
@@ -142,9 +142,9 @@ public class CommandFactory {
             );
         } catch (IllegalArgumentException e) {
             throw new InvalidDateFormatException(
-                    "Invalid date format. Supported formats:\n" +
-                            "1. d/M/yyyy HHmm\n" +
-                            "2. yyyy-MM-dd HHmm."
+                    "Invalid date format. Supported formats:\n"
+                        + "1. d/M/yyyy HHmm\n"
+                        + "2. yyyy-MM-dd HHmm."
             );
         }
     }
