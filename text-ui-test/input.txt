@@ -1,4 +1,4 @@
-todo Read a book
+todo Read book
 event Team meeting /from 2/10/2019 1400 /to 2/10/2019 1600
 deadline Submit assignment /by 2025-01-30 1700
 list

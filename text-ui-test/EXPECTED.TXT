@@ -15,7 +15,7 @@
 🗂️  Task Added!
 ════════════════════════════════════
   📋 Type: TODO
-  📝 Description: Read a book
+  📝 Description: Read book
 
 You now have 1 task(s) in your list.
 ════════════════════════════════════
@@ -44,22 +44,22 @@ You now have 3 task(s) in your list.
 👤 [You]   : 🤖 [Helix] : Listing tasks...
 ════════════════════════════════════
 📝 Task List:
-    1. [T][ ] Read a book
+    1. [T][ ] Read book
     2. [E][ ] Team meeting (from: Oct 02 2019, 2:00 pm to: Oct 02 2019, 4:00 pm)
     3. [D][ ] Submit assignment (by: Jan 30 2025, 5:00 pm)
 ════════════════════════════════════
 
 👤 [You]   : ✅ [Helix] : Task marked as complete!
-    [T][✔] Read a book
+    [T][✔] Read book
 
 👤 [You]   : ❌ [Helix] : Task marked as incomplete!
-    [T][ ] Read a book
+    [T][ ] Read book
 
 👤 [You]   : ════════════════════════════════════
 🗑️  Task Removed!
 ════════════════════════════════════
   📋 Type: TODO
-  📝 Description: Read a book
+  📝 Description: Read book
   🛠️ Task Status: PENDING
 
 You now have 2 task(s) in your list.
