@@ -3,7 +3,7 @@ package helix.command;
 import helix.enums.CommandType;
 import helix.task.Task;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * A helix.command to add a helix.task to the TaskList.
@@ -27,12 +27,12 @@ public class AddCommand extends Command {
      * Executes the add helix.command by adding the helix.task to the TaskList.
      *
      * @param taskList the TaskList to which the helix.task will be added
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.addTask(task, ui);
-        ui.showTaskAdded(task, taskList.getTaskCount());
+    public void execute(TaskList taskList, ConsoleUi consoleUi) {
+        taskList.addTask(task, consoleUi);
+        consoleUi.showTaskAdded(task, taskList.getTaskCount());
     }
 
 }

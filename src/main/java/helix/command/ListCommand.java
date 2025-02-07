@@ -5,7 +5,7 @@ import java.util.List;
 import helix.enums.CommandType;
 import helix.task.Task;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * A helix.command to list all tasks in the TaskList.
@@ -24,12 +24,12 @@ public class ListCommand extends Command {
      * Executes the list helix.command, printing all tasks in the TaskList.
      *
      * @param taskList the TaskList containing tasks to be listed
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        // get unmodifiable list of tasks and pass it to Ui
+    public void execute(TaskList taskList, ConsoleUi consoleUi) {
+        // get unmodifiable list of tasks and pass it to ConsoleUi
         List<Task> tasks = taskList.getTasks();
-        ui.showTaskList(tasks);
+        consoleUi.showTaskList(tasks);
     }
 }

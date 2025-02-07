@@ -4,7 +4,7 @@ import helix.enums.CommandType;
 import helix.enums.ExecutionStatus;
 import helix.exception.HelixException;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * Abstract base class representing a generic helix.command.
@@ -36,10 +36,10 @@ public abstract class Command {
      * Executes the helix.command on the specified TaskList.
      *
      * @param taskList the TaskList on which the helix.command will operate
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      * @throws HelixException if the helix.command fails
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws HelixException;
+    public abstract void execute(TaskList taskList, ConsoleUi consoleUi) throws HelixException;
 
     /**
      * Determines whether the application should continue or terminate after executing the helix.command.
