@@ -5,7 +5,7 @@ import helix.exception.HelixException;
 import helix.exception.TaskIndexOutOfBoundsException;
 import helix.task.Task;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * A helix.command to delete a helix.task from the helix.task list.
@@ -28,18 +28,18 @@ public class DeleteCommand extends Command {
      * Executes the delete helix.command by removing the helix.task from the helix.task list.
      *
      * @param taskList the helix.task list from which the helix.task will be removed
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      * @throws TaskIndexOutOfBoundsException if the helix.task index is invalid
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws HelixException {
+    public void execute(TaskList taskList, ConsoleUi consoleUi) throws HelixException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
 
         // Remove the helix.task and notify the user
-        Task task = taskList.removeTask(taskIndex, ui);
-        ui.showTaskRemoved(task, taskList.getTaskCount());
+        Task task = taskList.removeTask(taskIndex, consoleUi);
+        consoleUi.showTaskRemoved(task, taskList.getTaskCount());
 
     }
 }

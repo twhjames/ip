@@ -1,4 +1,4 @@
-package helix.gui;
+package helix.ui;
 
 import helix.Helix;
 import javafx.fxml.FXML;
@@ -23,11 +23,12 @@ public class MainWindow {
 
     private Helix helix;
 
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image helixImage = new Image(this.getClass().getResourceAsStream("/images/helix.png"));
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // Bind "Enter" key to send message
-        userInput.setOnAction(event -> handleUserInput());
     }
 
     public void setHelix(Helix helix) {
@@ -42,8 +43,8 @@ public class MainWindow {
         String input = userInput.getText();
         String response = helix.executeCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, new Image(this.getClass().getResourceAsStream("/images/user.png"))),
-                DialogBox.getHelixDialog(response, new Image(this.getClass().getResourceAsStream("/images/helix.png")))
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getHelixDialog(response, helixImage)
         );
         userInput.clear();
     }

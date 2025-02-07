@@ -1,4 +1,4 @@
-package helix.gui;
+package helix.ui;
 
 import javafx.application.Application;
 

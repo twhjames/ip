@@ -2,16 +2,14 @@ package helix;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 import helix.command.Command;
 import helix.command.CommandFactory;
-import helix.enums.ExecutionStatus;
 import helix.enums.FilePath;
 import helix.exception.HelixException;
 import helix.storage.Storage;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * The main class for the Helix personal assistant application.
@@ -26,7 +24,7 @@ public class Helix {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private ConsoleUi consoleUi;
 
     /**
      * Constructs a new instance of the Helix application with the specified storage file path.
@@ -41,14 +39,14 @@ public class Helix {
      * @param filePath The file path to the storage file where tasks are saved and loaded.
      */
     public Helix(String filePath) {
-        // Initialize Ui component
-        ui = new Ui();
+        // Initialize ConsoleUi component
+        consoleUi = new ConsoleUi();
 
         // Resolve the file path using the FilePath enum
         String storageFile = FilePath.STORAGE_FILE.getPath();
         String resolvedFilePath;
-        if (System.getProperty("user.dir").contains("text-ui-test")) {
-            // Running from the `text-ui-test` folder
+        if (System.getProperty("user.dir").contains("text-consoleUi-test")) {
+            // Running from the `text-consoleUi-test` folder
             resolvedFilePath = Paths.get("..", storageFile).toAbsolutePath().normalize().toString();
         } else {
             // Running from the project root
@@ -60,7 +58,7 @@ public class Helix {
         try {
             taskList = new TaskList(storage);
         } catch (IOException e) {
-            ui.showLoadingStorageError();
+            consoleUi.showLoadingStorageError();
         }
     }
 
@@ -82,10 +80,10 @@ public class Helix {
             Command command = CommandFactory.parseCommand(userInput);
 
             // Execute the command using polymorphism
-            command.execute(taskList, ui);
+            command.execute(taskList, consoleUi);
 
-            // Return the last message displayed by the Ui
-            return ui.getLastMessage();
+            // Return the last message displayed by the ConsoleUi
+            return consoleUi.getLastMessage();
         } catch (HelixException e) {
             return e.getFormattedMessage();
         } catch (Exception e) {
