@@ -31,24 +31,31 @@ public class Helix {
     /**
      * Constructs a new instance of the Helix application with the specified storage file path.
      *
-     * @param filePath the file path to the storage file where tasks are saved and loaded
+     * <p>
+     * This constructor initializes the user interface and storage components, determines
+     * the resolved file path for the storage file, and attempts to load the task list from
+     * the storage. If the task list cannot be loaded due to an I/O error, it initializes
+     * an empty task list and displays an error message.
+     * </p>
+     *
+     * @param filePath The file path to the storage file where tasks are saved and loaded.
      */
     public Helix(String filePath) {
-        // create Ui component
+        // Initialize Ui component
         ui = new Ui();
 
-        // resolve the file path using the enum
+        // Resolve the file path using the FilePath enum
         String storageFile = FilePath.STORAGE_FILE.getPath();
         String resolvedFilePath;
         if (System.getProperty("user.dir").contains("text-ui-test")) {
-            // running from `text-ui-test` folder
+            // Running from the `text-ui-test` folder
             resolvedFilePath = Paths.get("..", storageFile).toAbsolutePath().normalize().toString();
         } else {
-            // running from project root
+            // Running from the project root
             resolvedFilePath = Paths.get(storageFile).toAbsolutePath().normalize().toString();
         }
 
-        // load task from storage
+        // Load tasks from storage
         storage = new Storage(resolvedFilePath);
         try {
             taskList = new TaskList(storage);
@@ -58,44 +65,45 @@ public class Helix {
     }
 
     /**
-     * Runs the main program loop for the Helix application.
+     * Executes a user command and returns the response message.
+     *
      * <p>
-     * This method initializes the user interface, handles user input, and delegates command
-     * execution to the appropriate components. It continues to run until the exit command
-     * is issued.
+     * This method parses the user input, delegates the command execution to the appropriate
+     * command class, and returns the result of the execution. If any exceptions are thrown
+     * during parsing or execution, the method catches and returns an appropriate error message.
      * </p>
+     *
+     * @param userInput The user input string representing the command to be executed.
+     * @return A string containing the result of the command execution or an error message.
      */
-    public void run() {
-        ui.showWelcome();
-        ExecutionStatus isExit = ExecutionStatus.CONTINUE;
-        Scanner sc = new Scanner(System.in);
+    public String executeCommand(String userInput) {
+        try {
+            // Parse command from input and instantiate the Command object
+            Command command = CommandFactory.parseCommand(userInput);
 
-        while (isExit != ExecutionStatus.EXIT) {
-            try {
-                // parse command from input and instantiate Command object
-                String userInput = ui.readCommand(sc);
-                Command command = CommandFactory.parseCommand(userInput);
+            // Execute the command using polymorphism
+            command.execute(taskList, ui);
 
-                // execute command using polymorphism
-                command.execute(taskList, ui);
-                isExit = command.isExit();
-            } catch (HelixException e) {
-                ui.showError(e.getFormattedMessage());
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            }
+            // Return the last message displayed by the Ui
+            return ui.getLastMessage();
+        } catch (HelixException e) {
+            return e.getFormattedMessage();
+        } catch (Exception e) {
+            return "Unexpected error: " + e.getMessage();
         }
-
-        // clean up resources
-        sc.close();
     }
 
     /**
      * The main entry point of the Helix application.
      *
-     * @param args command-line arguments (not used in this application)
+     * <p>
+     * This method initializes and runs the application. It serves as the starting point
+     * for executing the Helix program when run from the command line.
+     * </p>
+     *
+     * @param args Command-line arguments (not used in this application).
      */
     public static void main(String[] args) {
-        new Helix("data/helix_tasklist.txt").run();
+        System.out.println("Helix Running.");
     }
 }
