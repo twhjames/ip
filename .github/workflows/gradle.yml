@@ -33,6 +33,10 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check
 
+      - name: Install dos2unix (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y dos2unix
+
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/text-ui-test
