@@ -20,7 +20,7 @@ public class ConsoleUi {
 
     private String lastMessage = "";
 
-    private final String LOGO = """
+    private final String logo = """
            ╔════════════════════════════════════════════════════════╗
            ║                                                        ║
            ║             _   _  _____  _      ___ __  __            ║
@@ -33,34 +33,34 @@ public class ConsoleUi {
            """;
 
     // Output symbols for formatting
-    private final String HELIX_SYMBOL = OutputSymbol.HELIX.getSymbol();
-    private final String USER_SYMBOL = OutputSymbol.USER.getSymbol();
-    private final String WARNING_SYMBOL = OutputSymbol.WARNING.getSymbol();
-    private final String FOLDER_SYMBOL = OutputSymbol.FOLDER.getSymbol();
-    private final String CLIPBOARD_SYMBOL = OutputSymbol.CLIPBOARD.getSymbol();
-    private final String NOTE_SYMBOL = OutputSymbol.NOTE.getSymbol();
-    private final String CALENDAR_SYMBOL = OutputSymbol.CALENDAR.getSymbol();
-    private final String CLOCK_SYMBOL = OutputSymbol.CLOCK.getSymbol();
-    private final String HANDWAVE_SYMBOL = OutputSymbol.HANDWAVE.getSymbol();
-    private final String SPARKLE_SYMBOL = OutputSymbol.SPARKLE.getSymbol();
-    private final String REMOVED_SYMBOL = OutputSymbol.BIN.getSymbol();
-    private final String TYPE_SYMBOL = OutputSymbol.CLIPBOARD.getSymbol();
-    private final String DESCRIPTION_SYMBOL = OutputSymbol.NOTE.getSymbol();
-    private final String COMPLETED_SYMBOL = OutputSymbol.WRENCH.getSymbol();
-    private final String CHECK_SYMBOL = OutputSymbol.CHECK.getSymbol();
-    private final String CROSS_SYMBOL = OutputSymbol.CROSS.getSymbol();
+    private final String helixSymbol = OutputSymbol.HELIX.getSymbol();
+    private final String userSymbol = OutputSymbol.USER.getSymbol();
+    private final String warningSymbol = OutputSymbol.WARNING.getSymbol();
+    private final String folderSymbol = OutputSymbol.FOLDER.getSymbol();
+    private final String clipboardSymbol = OutputSymbol.CLIPBOARD.getSymbol();
+    private final String noteSymbol = OutputSymbol.NOTE.getSymbol();
+    private final String calendarSymbol = OutputSymbol.CALENDAR.getSymbol();
+    private final String clockSymbol = OutputSymbol.CLOCK.getSymbol();
+    private final String handwaveSymbol = OutputSymbol.HANDWAVE.getSymbol();
+    private final String sparkleSymbol = OutputSymbol.SPARKLE.getSymbol();
+    private final String removedSymbol = OutputSymbol.BIN.getSymbol();
+    private final String typeSymbol = OutputSymbol.CLIPBOARD.getSymbol();
+    private final String descriptionSymbol = OutputSymbol.NOTE.getSymbol();
+    private final String completedSymbol = OutputSymbol.WRENCH.getSymbol();
+    private final String checkSymbol = OutputSymbol.CHECK.getSymbol();
+    private final String crossSymbol = OutputSymbol.CROSS.getSymbol();
 
     /**
      * Displays the welcome message when the application starts.
      */
     public void showWelcome() {
         // print introduction message
-        System.out.println(LOGO);
+        System.out.println(logo);
         System.out.println(
-                HELIX_SYMBOL + " [Helix] : Hello! I'm your personal assistant, "
+                helixSymbol + " [Helix] : Hello! I'm your personal assistant, "
         );
         System.out.println(
-                HELIX_SYMBOL + " [Helix] : What can I do for you today?\n"
+                helixSymbol + " [Helix] : What can I do for you today?\n"
         );
     }
 
@@ -69,18 +69,18 @@ public class ConsoleUi {
      */
     public void showExit() {
         System.out.println(
-                HELIX_SYMBOL
+                helixSymbol
                         + " [Helix] : Bye! Hope to see you soon! "
-                        + HANDWAVE_SYMBOL
+                        + handwaveSymbol
         );
         System.out.println("=========================================================");
         System.out.println(
-                SPARKLE_SYMBOL
+                sparkleSymbol
                         + " Thank you for using  Have a great day! "
-                        + SPARKLE_SYMBOL
+                        + sparkleSymbol
         );
         System.out.println("=========================================================");
-        lastMessage = HANDWAVE_SYMBOL + "Bye! Hope to see you soon!";
+        lastMessage = handwaveSymbol + "Bye! Hope to see you soon!";
     }
 
     /**
@@ -91,7 +91,7 @@ public class ConsoleUi {
      */
     public String readCommand(Scanner sc) {
         // retrieve user input
-        System.out.print(USER_SYMBOL + " [You]   : ");
+        System.out.print(userSymbol + " [You]   : ");
         return sc.nextLine();
     }
 
@@ -108,17 +108,17 @@ public class ConsoleUi {
      * @param message the error message to display
      */
     public void showError(String message) {
-        lastMessage = String.format("%s Error message - %s", WARNING_SYMBOL, message);
-        System.out.println(WARNING_SYMBOL + " [Helix] : " + message + "\n");
+        lastMessage = String.format("%s Error message - %s", warningSymbol, message);
+        System.out.println(warningSymbol + " [Helix] : " + message + "\n");
     }
 
     /**
      * Displays an error message indicating a failure to load tasks from storage.
      */
     public void showLoadingStorageError() {
-        lastMessage = String.format("%s Failed to load tasks. Starting with an empty list.", WARNING_SYMBOL);
+        lastMessage = String.format("%s Failed to load tasks. Starting with an empty list.", warningSymbol);
         System.out.println(
-                WARNING_SYMBOL + " [Helix] : Failed to load tasks. Starting with an empty list."
+                warningSymbol + " [Helix] : Failed to load tasks. Starting with an empty list."
         );
     }
 
@@ -128,9 +128,9 @@ public class ConsoleUi {
      * @param message the detailed error message
      */
     public void showSavingStorageError(String message) {
-        lastMessage = String.format("%s Failed to save tasks: %s", WARNING_SYMBOL, message);
+        lastMessage = String.format("%s Failed to save tasks: %s", warningSymbol, message);
         System.out.println(
-                WARNING_SYMBOL + " [Helix] : Failed to save tasks: " + message
+                warningSymbol + " [Helix] : Failed to save tasks: " + message
         );
     }
 
@@ -150,25 +150,25 @@ public class ConsoleUi {
         String taskDetails = task.getTaskDetails();
 
         showLine();
-        System.out.println(FOLDER_SYMBOL + "  Task Added!");
+        System.out.println(folderSymbol + "  Task Added!");
         showLine();
 
-        System.out.println("  " + CLIPBOARD_SYMBOL + " Type: " + taskType.name());
-        System.out.println("  " + NOTE_SYMBOL + " Description: " + taskDescription);
+        System.out.println("  " + clipboardSymbol + " Type: " + taskType.name());
+        System.out.println("  " + noteSymbol + " Description: " + taskDescription);
 
-        lastMessage = FOLDER_SYMBOL + "  Task Added!\n"
-                + "  " + CLIPBOARD_SYMBOL + " Type: " + taskType.name() + "\n"
-                + "  " + NOTE_SYMBOL + " Description: " + taskDescription + "\n";
+        lastMessage = folderSymbol + "  Task Added!\n"
+                + "  " + clipboardSymbol + " Type: " + taskType.name() + "\n"
+                + "  " + noteSymbol + " Description: " + taskDescription + "\n";
 
         if (taskType == TaskType.DEADLINE) {
-            System.out.println("  " + CALENDAR_SYMBOL + " Due: " + taskDetails);
-            lastMessage += "  " + CALENDAR_SYMBOL + " Due: " + taskDetails;
+            System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
+            lastMessage += "  " + calendarSymbol + " Due: " + taskDetails;
         } else if (taskType == TaskType.EVENT) {
             String[] parts = taskDetails.split(" - ");
             String from = parts[0];
             String to = parts[1];
-            System.out.println("  " + CLOCK_SYMBOL + " From: " + from + "\n  " + CLOCK_SYMBOL + " To: " + to);
-            lastMessage += "  " + CLOCK_SYMBOL + " From: " + parts[0] + "\n  " + CLOCK_SYMBOL + " To: " + parts[1] + "\n";
+            System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
+            lastMessage += "  " + clockSymbol + " From: " + parts[0] + "\n  " + clockSymbol + " To: " + parts[1] + "\n";
         }
         System.out.println("\nYou now have " + taskCount + " task(s) in your list.");
         lastMessage += "\nYou now have " + taskCount + " task(s) in your list.\n";
@@ -193,28 +193,28 @@ public class ConsoleUi {
         String taskDetails = task.getTaskDetails();
 
         showLine();
-        System.out.println(REMOVED_SYMBOL + "  Task Removed!");
-        lastMessage = REMOVED_SYMBOL + "  Task Removed!\n";
+        System.out.println(removedSymbol + "  Task Removed!");
+        lastMessage = removedSymbol + "  Task Removed!\n";
 
         showLine();
-        System.out.println("  " + TYPE_SYMBOL + " Type: " + taskType.name());
-        System.out.println("  " + DESCRIPTION_SYMBOL + " Description: " + taskDescription);
-        lastMessage += "  " + TYPE_SYMBOL + " Type: " + taskType.name() + "\n"
-                + "  " + DESCRIPTION_SYMBOL + " Description: " + taskDescription + "\n";
+        System.out.println("  " + typeSymbol + " Type: " + taskType.name());
+        System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
+        lastMessage += "  " + typeSymbol + " Type: " + taskType.name() + "\n"
+                + "  " + descriptionSymbol + " Description: " + taskDescription + "\n";
 
         if (taskType == TaskType.DEADLINE) {
-            System.out.println("  " + CALENDAR_SYMBOL + " Due: " + taskDetails);
-            lastMessage += "  " + CALENDAR_SYMBOL + " Due: " + taskDetails;
+            System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
+            lastMessage += "  " + calendarSymbol + " Due: " + taskDetails;
         } else if (taskType == TaskType.EVENT) {
             String[] parts = taskDetails.split(" - ");
             String from = parts[0];
             String to = parts[1];
-            System.out.println("  " + CLOCK_SYMBOL + " From: " + from + "\n  " + CLOCK_SYMBOL + " To: " + to);
-            lastMessage += "  " + CLOCK_SYMBOL + " From: " + from + "\n  " + CLOCK_SYMBOL + " To: " + to;
+            System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
+            lastMessage += "  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to;
         }
-        System.out.println("  " + COMPLETED_SYMBOL + " Task Status: " + taskStatus);
+        System.out.println("  " + completedSymbol + " Task Status: " + taskStatus);
         System.out.println("\nYou now have " + taskCount + " task(s) in your list.");
-        lastMessage += "  " + COMPLETED_SYMBOL + " Task Status: " + taskStatus
+        lastMessage += "  " + completedSymbol + " Task Status: " + taskStatus
                 + "\n\nYou now have " + taskCount + " task(s) in your list.";
         showLine();
         System.out.println();
@@ -226,11 +226,11 @@ public class ConsoleUi {
      * @param tasks the {@link List} of {@link Task} objects to display
      */
     public void showTaskList(List<Task> tasks) {
-        System.out.println(HELIX_SYMBOL + " [Helix] : Listing tasks...");
+        System.out.println(helixSymbol + " [Helix] : Listing tasks...");
         showLine();
-        System.out.println(NOTE_SYMBOL + " Task List:");
+        System.out.println(noteSymbol + " Task List:");
 
-        lastMessage = "Listing tasks...\n" + NOTE_SYMBOL + " Task List:\n";
+        lastMessage = "Listing tasks...\n" + noteSymbol + " Task List:\n";
 
         if (tasks.isEmpty()) {
             System.out.println("There's no pending tasks.");
@@ -255,8 +255,8 @@ public class ConsoleUi {
      * Displays a message indicating that the task is already marked as completed.
      */
     public void showTaskAlreadyCompleted() {
-        System.out.println(HELIX_SYMBOL + " [Helix] : This task is already marked as done!\n");
-        lastMessage = WARNING_SYMBOL + " This task is already completed!";
+        System.out.println(helixSymbol + " [Helix] : This task is already marked as done!\n");
+        lastMessage = warningSymbol + " This task is already completed!";
     }
 
     /**
@@ -265,17 +265,17 @@ public class ConsoleUi {
      * @param task the {@link Task} that was marked as complete
      */
     public void showTaskMarkedComplete(Task task) {
-        System.out.println(CHECK_SYMBOL + " [Helix] : Task marked as complete!");
+        System.out.println(checkSymbol + " [Helix] : Task marked as complete!");
         System.out.println("    " + task + "\n");
-        lastMessage = CHECK_SYMBOL + " Task marked as complete!\n" + "    " + task;
+        lastMessage = checkSymbol + " Task marked as complete!\n" + "    " + task;
     }
 
     /**
      * Displays a message indicating that the task is already marked as pending.
      */
     public void showTaskAlreadyPending() {
-        System.out.println(HELIX_SYMBOL + " [Helix] : This task is already not done!\n");
-        lastMessage = WARNING_SYMBOL + " This task is already pending!";
+        System.out.println(helixSymbol + " [Helix] : This task is already not done!\n");
+        lastMessage = warningSymbol + " This task is already pending!";
     }
 
     /**
@@ -284,9 +284,9 @@ public class ConsoleUi {
      * @param task the {@link Task} that was marked as pending
      */
     public void showTaskMarkedPending(Task task) {
-        System.out.println(CROSS_SYMBOL + " [Helix] : Task marked as incomplete!");
+        System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
         System.out.println("    " + task + "\n");
-        lastMessage = CROSS_SYMBOL + " Task marked as incomplete!\n" + "    " + task;
+        lastMessage = crossSymbol + " Task marked as incomplete!\n" + "    " + task;
     }
 
     /**
@@ -298,11 +298,11 @@ public class ConsoleUi {
         assert matchingTasks != null : "matchingTasks list should not be null!";
 
         if (matchingTasks.isEmpty()) {
-            System.out.println(HELIX_SYMBOL + " [Helix] : No matching tasks found!");
+            System.out.println(helixSymbol + " [Helix] : No matching tasks found!");
             lastMessage = "No matching tasks found!";
         } else {
             showLine();
-            System.out.println(HELIX_SYMBOL + " [Helix] : Tasks with matching keywords...");
+            System.out.println(helixSymbol + " [Helix] : Tasks with matching keywords...");
             lastMessage = "Tasks with matching keywords...\n";
 
             StringBuilder messageBuilder = new StringBuilder();
