@@ -35,6 +35,7 @@ public class CommandFactory {
         CommandType commandType;
         try {
             commandType = CommandType.valueOf(command);
+            assert commandType != null : "commandType should never be null!";
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException();
         }
