@@ -57,6 +57,7 @@ public class Helix {
         storage = new Storage(resolvedFilePath);
         try {
             taskList = new TaskList(storage);
+            assert taskList != null : "taskList is initialization failed!";
         } catch (IOException e) {
             consoleUi.showLoadingStorageError();
         }

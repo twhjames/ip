@@ -141,7 +141,11 @@ public class ConsoleUi {
      * @param taskCount the total number of tasks in the list after the addition
      */
     public void showTaskAdded(Task task, int taskCount) {
+        assert task != null : "Task should not be null!";
+
         TaskType taskType = task.getTaskType();
+        assert taskType != null : "Task type should not be null!";
+
         String taskDescription = task.getDescription();
         String taskDetails = task.getTaskDetails();
 
@@ -179,7 +183,11 @@ public class ConsoleUi {
      * @param taskCount the total number of tasks in the list after the removal
      */
     public void showTaskRemoved(Task task, int taskCount) {
+        assert task != null : "Task should not be null!";
+
         TaskType taskType = task.getTaskType();
+        assert taskType != null : "Task type should not be null!";
+
         String taskStatus = task.getTaskStatus().name();
         String taskDescription = task.getDescription();
         String taskDetails = task.getTaskDetails();
@@ -287,6 +295,8 @@ public class ConsoleUi {
      * @param matchingTasks the list of tasks that match the search keyword
      */
     public void showMatchingTasks(List<Task> matchingTasks) {
+        assert matchingTasks != null : "matchingTasks list should not be null!";
+
         if (matchingTasks.isEmpty()) {
             System.out.println(helixSymbol + " [Helix] : No matching tasks found!");
             lastMessage = "No matching tasks found!";
@@ -312,6 +322,7 @@ public class ConsoleUi {
      * @return the last message as a String
      */
     public String getLastMessage() {
+        assert lastMessage != null : "lastMessage should not be null!";
         return lastMessage;
     }
 }
