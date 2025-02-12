@@ -187,6 +187,38 @@ public class CommandFactory {
     }
 
     /**
+     * Validates and extracts a task number from the given command arguments.
+     *
+     * <p>This method ensures that the input contains exactly one valid positive integer representing
+     * the task number. If the input is empty, contains non-numeric characters, or includes extra
+     * arguments, an appropriate exception is thrown.</p>
+     *
+     * @param args the raw arguments provided by the user
+     * @param commandName the name of the command being validated (e.g., "mark", "unmark", "delete")
+     * @return the zero-based task index parsed from the input
+     * @throws MissingArgumentException if no task number is provided
+     * @throws TooManyArgumentsException if multiple arguments are provided instead of a single task number
+     * @throws InvalidNumberFormatException if the task number is not a valid positive integer
+     */
+    private static int validateTaskNumber(String args, String commandName) throws HelixException {
+        if (args.isEmpty()) {
+            throw new MissingArgumentException(commandName, commandName + " <task number>");
+        }
+
+        String[] splitArgs = args.split(" ");
+
+        if (splitArgs.length > 1) {
+            throw new TooManyArgumentsException(commandName, commandName + " <task number>");
+        }
+
+        if (!splitArgs[0].matches("\\d+")) {
+            throw new InvalidNumberFormatException("The task number must be a positive integer.");
+        }
+
+        return Integer.parseInt(splitArgs[0]) - 1;
+    }
+
+    /**
      * Creates a {@link MarkCommand} after validating arguments.
      *
      * @param args the arguments for the {@code mark} helix.command (helix.task number)
@@ -196,25 +228,8 @@ public class CommandFactory {
      * @throws TooManyArgumentsException if the helix.command contains too many arguments
      */
     private static Command createMarkCommand(String args) throws HelixException {
-        if (args.isEmpty()) {
-            throw new MissingArgumentException(
-                    CommandType.MARK.name().toLowerCase(Locale.ROOT),
-                    "mark <helix.task number>"
-            );
-        }
-        String[] splitArgs = args.split(" ");
-        if (splitArgs.length > 1) {
-            throw new TooManyArgumentsException(
-                    CommandType.MARK.name().toLowerCase(Locale.ROOT),
-                    "mark <helix.task number>"
-            );
-        }
-        if (!splitArgs[0].matches("\\d+")) {
-            throw new InvalidNumberFormatException(
-                    "The helix.task number must be a positive integer. Example: mark <helix.task number>"
-            );
-        }
-        return new MarkCommand(Integer.parseInt(args) - 1);
+        int taskNumber = validateTaskNumber(args, CommandType.MARK.name().toLowerCase(Locale.ROOT));
+        return new MarkCommand(taskNumber);
     }
 
     /**
@@ -227,25 +242,8 @@ public class CommandFactory {
      * @throws TooManyArgumentsException if the helix.command contains too many arguments
      */
     private static Command createUnmarkCommand(String args) throws HelixException {
-        if (args.isEmpty()) {
-            throw new MissingArgumentException(
-                    CommandType.UNMARK.name().toLowerCase(Locale.ROOT),
-                    "unmark <helix.task number>"
-            );
-        }
-        String[] splitArgs = args.split(" ");
-        if (splitArgs.length > 1) {
-            throw new TooManyArgumentsException(
-                    CommandType.UNMARK.name().toLowerCase(Locale.ROOT),
-                    "unmark <helix.task number>"
-            );
-        }
-        if (!splitArgs[0].matches("\\d+")) {
-            throw new InvalidNumberFormatException(
-                    "The helix.task number must be a positive integer. Example: unmark <helix.task number>"
-            );
-        }
-        return new UnmarkCommand(Integer.parseInt(args) - 1);
+        int taskNumber = validateTaskNumber(args, CommandType.UNMARK.name().toLowerCase(Locale.ROOT));
+        return new UnmarkCommand(taskNumber);
     }
 
     /**
@@ -258,25 +256,8 @@ public class CommandFactory {
      * @throws TooManyArgumentsException if the helix.command contains too many arguments
      */
     private static Command createDeleteCommand(String args) throws HelixException {
-        if (args.isEmpty()) {
-            throw new MissingArgumentException(
-                    CommandType.DELETE.name().toLowerCase(Locale.ROOT),
-                    "delete <helix.task number>"
-            );
-        }
-        String[] splitArgs = args.split(" ");
-        if (splitArgs.length > 1) {
-            throw new TooManyArgumentsException(
-                    CommandType.DELETE.name().toLowerCase(Locale.ROOT),
-                    "delete <helix.task number>"
-            );
-        }
-        if (!args.matches("\\d+")) {
-            throw new InvalidNumberFormatException(
-                    "The helix.task number must be a positive integer. Example: delete <helix.task number>"
-            );
-        }
-        return new DeleteCommand(Integer.parseInt(args) - 1);
+        int taskNumber = validateTaskNumber(args, CommandType.DELETE.name().toLowerCase(Locale.ROOT));
+        return new DeleteCommand(taskNumber);
     }
 
     /**
