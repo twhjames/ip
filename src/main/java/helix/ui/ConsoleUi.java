@@ -1,11 +1,11 @@
 package helix.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import helix.enums.OutputSymbol;
 import helix.enums.TaskType;
 import helix.task.Task;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Handles all user interaction for the helix.Helix application.
@@ -16,7 +16,9 @@ import java.util.Scanner;
  * It centralizes all console-based interactions to maintain a clear separation of concerns.
  * </p>
  */
-public class Ui {
+public class ConsoleUi {
+
+    private String lastMessage = "";
 
     private final String logo = """
            ╔════════════════════════════════════════════════════════╗
@@ -67,17 +69,18 @@ public class Ui {
      */
     public void showExit() {
         System.out.println(
-                helixSymbol +
-                        " [Helix] : Bye! Hope to see you soon! " +
-                        handwaveSymbol
+                helixSymbol
+                        + " [Helix] : Bye! Hope to see you soon! "
+                        + handwaveSymbol
         );
         System.out.println("=========================================================");
         System.out.println(
-                sparkleSymbol +
-                        " Thank you for using  Have a great day! " +
-                        sparkleSymbol
+                sparkleSymbol
+                        + " Thank you for using  Have a great day! "
+                        + sparkleSymbol
         );
         System.out.println("=========================================================");
+        lastMessage = handwaveSymbol + "Bye! Hope to see you soon!";
     }
 
     /**
@@ -105,6 +108,7 @@ public class Ui {
      * @param message the error message to display
      */
     public void showError(String message) {
+        lastMessage = String.format("%s Error message - %s", warningSymbol, message);
         System.out.println(warningSymbol + " [Helix] : " + message + "\n");
     }
 
@@ -112,6 +116,7 @@ public class Ui {
      * Displays an error message indicating a failure to load tasks from storage.
      */
     public void showLoadingStorageError() {
+        lastMessage = String.format("%s Failed to load tasks. Starting with an empty list.", warningSymbol);
         System.out.println(
                 warningSymbol + " [Helix] : Failed to load tasks. Starting with an empty list."
         );
@@ -123,6 +128,7 @@ public class Ui {
      * @param message the detailed error message
      */
     public void showSavingStorageError(String message) {
+        lastMessage = String.format("%s Failed to save tasks: %s", warningSymbol, message);
         System.out.println(
                 warningSymbol + " [Helix] : Failed to save tasks: " + message
         );
@@ -143,17 +149,25 @@ public class Ui {
         System.out.println(folderSymbol + "  Task Added!");
         showLine();
 
-        System.out.println("  " + clipboardSymbol +" Type: " + taskType.name());
-        System.out.println("  " + noteSymbol +" Description: " + taskDescription);
+        System.out.println("  " + clipboardSymbol + " Type: " + taskType.name());
+        System.out.println("  " + noteSymbol + " Description: " + taskDescription);
+
+        lastMessage = folderSymbol + "  Task Added!\n"
+                + "  " + clipboardSymbol + " Type: " + taskType.name() + "\n"
+                + "  " + noteSymbol + " Description: " + taskDescription + "\n";
+
         if (taskType == TaskType.DEADLINE) {
             System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
+            lastMessage += "  " + calendarSymbol + " Due: " + taskDetails;
         } else if (taskType == TaskType.EVENT) {
             String[] parts = taskDetails.split(" - ");
             String from = parts[0];
             String to = parts[1];
             System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
+            lastMessage += "  " + clockSymbol + " From: " + parts[0] + "\n  " + clockSymbol + " To: " + parts[1] + "\n";
         }
         System.out.println("\nYou now have " + taskCount + " task(s) in your list.");
+        lastMessage += "\nYou now have " + taskCount + " task(s) in your list.\n";
         showLine();
         System.out.println();
     }
@@ -172,19 +186,28 @@ public class Ui {
 
         showLine();
         System.out.println(removedSymbol + "  Task Removed!");
+        lastMessage = removedSymbol + "  Task Removed!\n";
+
         showLine();
         System.out.println("  " + typeSymbol + " Type: " + taskType.name());
         System.out.println("  " + descriptionSymbol + " Description: " + taskDescription);
+        lastMessage += "  " + typeSymbol + " Type: " + taskType.name() + "\n"
+                + "  " + descriptionSymbol + " Description: " + taskDescription + "\n";
+
         if (taskType == TaskType.DEADLINE) {
             System.out.println("  " + calendarSymbol + " Due: " + taskDetails);
+            lastMessage += "  " + calendarSymbol + " Due: " + taskDetails;
         } else if (taskType == TaskType.EVENT) {
             String[] parts = taskDetails.split(" - ");
             String from = parts[0];
             String to = parts[1];
             System.out.println("  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to);
+            lastMessage += "  " + clockSymbol + " From: " + from + "\n  " + clockSymbol + " To: " + to;
         }
         System.out.println("  " + completedSymbol + " Task Status: " + taskStatus);
         System.out.println("\nYou now have " + taskCount + " task(s) in your list.");
+        lastMessage += "  " + completedSymbol + " Task Status: " + taskStatus
+                + "\n\nYou now have " + taskCount + " task(s) in your list.";
         showLine();
         System.out.println();
     }
@@ -199,15 +222,23 @@ public class Ui {
         showLine();
         System.out.println(noteSymbol + " Task List:");
 
+        lastMessage = "Listing tasks...\n" + noteSymbol + " Task List:\n";
+
         if (tasks.isEmpty()) {
             System.out.println("There's no pending tasks.");
             showLine();
             System.out.println();
+            lastMessage += "There's no pending tasks.";
             return;
         }
+
+        StringBuilder messageBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("    %d. %s%n", i + 1, tasks.get(i));
+            messageBuilder.append(String.format("    %d. %s%n", i + 1, tasks.get(i)));
         }
+        lastMessage += messageBuilder.toString();
+
         showLine();
         System.out.println();
     }
@@ -217,6 +248,7 @@ public class Ui {
      */
     public void showTaskAlreadyCompleted() {
         System.out.println(helixSymbol + " [Helix] : This task is already marked as done!\n");
+        lastMessage = warningSymbol + " This task is already completed!";
     }
 
     /**
@@ -227,6 +259,7 @@ public class Ui {
     public void showTaskMarkedComplete(Task task) {
         System.out.println(checkSymbol + " [Helix] : Task marked as complete!");
         System.out.println("    " + task + "\n");
+        lastMessage = checkSymbol + " Task marked as complete!\n" + "    " + task;
     }
 
     /**
@@ -234,6 +267,7 @@ public class Ui {
      */
     public void showTaskAlreadyPending() {
         System.out.println(helixSymbol + " [Helix] : This task is already not done!\n");
+        lastMessage = warningSymbol + " This task is already pending!";
     }
 
     /**
@@ -244,5 +278,40 @@ public class Ui {
     public void showTaskMarkedPending(Task task) {
         System.out.println(crossSymbol + " [Helix] : Task marked as incomplete!");
         System.out.println("    " + task + "\n");
+        lastMessage = crossSymbol + " Task marked as incomplete!\n" + "    " + task;
+    }
+
+    /**
+     * Displays the matching tasks found in the task list.
+     *
+     * @param matchingTasks the list of tasks that match the search keyword
+     */
+    public void showMatchingTasks(List<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println(helixSymbol + " [Helix] : No matching tasks found!");
+            lastMessage = "No matching tasks found!";
+        } else {
+            showLine();
+            System.out.println(helixSymbol + " [Helix] : Tasks with matching keywords...");
+            lastMessage = "Tasks with matching keywords...\n";
+
+            StringBuilder messageBuilder = new StringBuilder();
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.printf("    %d. %s%n", i + 1, matchingTasks.get(i));
+                messageBuilder.append(String.format("    %d. %s%n", i + 1, matchingTasks.get(i)));
+            }
+            lastMessage += messageBuilder.toString();
+            showLine();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Retrieves the last message displayed by the ConsoleUi.
+     *
+     * @return the last message as a String
+     */
+    public String getLastMessage() {
+        return lastMessage;
     }
 }

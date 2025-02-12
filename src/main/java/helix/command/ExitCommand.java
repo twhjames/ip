@@ -3,7 +3,7 @@ package helix.command;
 import helix.enums.CommandType;
 import helix.enums.ExecutionStatus;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * A helix.command to terminate the application.
@@ -22,11 +22,11 @@ public class ExitCommand extends Command {
      * Executes the exit helix.command, displaying a farewell message.
      *
      * @param taskList the TaskList (unused in this implementation)
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.showExit();
+    public void execute(TaskList taskList, ConsoleUi consoleUi) {
+        consoleUi.showExit();
     }
 
     /**
@@ -39,4 +39,3 @@ public class ExitCommand extends Command {
         return ExecutionStatus.EXIT;
     }
 }
-

@@ -1,10 +1,10 @@
 package helix.task;
 
-import helix.enums.TaskType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import helix.enums.TaskType;
 
 /**
  * Represents an event helix.task with a description, start time, and end time.
@@ -13,9 +13,9 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
 
     private static final DateTimeFormatter[] INPUT_FORMATTERS = {
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // Format: 2/12/2019 1800
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),     // Format: 2019-10-15 1800
-            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")  // Format: Oct 11 2019, 5:00 pm
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // Format: 2/12/2019 1800
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // Format: 2019-10-15 1800
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a") // Format: Oct 11 2019, 5:00 pm
     };
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
     private final LocalDateTime startDateTime;

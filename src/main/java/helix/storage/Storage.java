@@ -1,18 +1,22 @@
 package helix.storage;
 
-import helix.enums.TaskStatus;
-import helix.task.Task;
-import helix.task.Deadline;
-import helix.task.Event;
-import helix.task.Todo;
-import helix.enums.TaskType;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import helix.enums.TaskStatus;
+import helix.enums.TaskType;
+import helix.task.Deadline;
+import helix.task.Event;
+import helix.task.Task;
+import helix.task.Todo;
 
 /**
  * Handles the saving and loading of tasks from a file.
@@ -41,9 +45,9 @@ public class Storage {
     public List<Task> load() throws IOException {
         // check if helix.storage folder and file exists
         if (!Files.exists(filePath)) {
-            Files.createDirectories(filePath.getParent());  // create directory if it does not exist
-            Files.createFile(filePath);                     // create file if it does not exist
-            return new ArrayList<>();                       // return an empty list for first-time use
+            Files.createDirectories(filePath.getParent()); // create directory if it does not exist
+            Files.createFile(filePath); // create file if it does not exist
+            return new ArrayList<>(); // return an empty list for first-time use
         }
 
         // helix.storage file exists, read and populate taskList
@@ -90,31 +94,31 @@ public class Storage {
             String description = parts[2];
 
             return switch (taskType) {
-                case TODO -> {
-                    Todo todo = new Todo(description);
-                    if (taskStatus == TaskStatus.COMPLETED) {
-                        todo.markAsDone();
-                    }
-                    yield todo;
+            case TODO -> {
+                Todo todo = new Todo(description);
+                if (taskStatus == TaskStatus.COMPLETED) {
+                    todo.markAsDone();
                 }
-                case DEADLINE -> {
-                    String duedate = parts[3];
-                    Deadline deadline = new Deadline(description, duedate);
-                    if (taskStatus == TaskStatus.COMPLETED) {
-                        deadline.markAsDone();
-                    }
-                    yield deadline;
+                yield todo;
+            }
+            case DEADLINE -> {
+                String duedate = parts[3];
+                Deadline deadline = new Deadline(description, duedate);
+                if (taskStatus == TaskStatus.COMPLETED) {
+                    deadline.markAsDone();
                 }
-                case EVENT -> {
-                    String[] eventDuration = parts[3].split(" - ");
-                    String startDateTime = eventDuration[0];
-                    String endDateTime = eventDuration[1];
-                    Event event = new Event(description, startDateTime, endDateTime);
-                    if (taskStatus == TaskStatus.COMPLETED) {
-                        event.markAsDone();
-                    }
-                    yield event;
+                yield deadline;
+            }
+            case EVENT -> {
+                String[] eventDuration = parts[3].split(" - ");
+                String startDateTime = eventDuration[0];
+                String endDateTime = eventDuration[1];
+                Event event = new Event(description, startDateTime, endDateTime);
+                if (taskStatus == TaskStatus.COMPLETED) {
+                    event.markAsDone();
                 }
+                yield event;
+            }
             };
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Error parsing helix.task: " + line, e);

@@ -1,8 +1,8 @@
 package helix.task;
 
-import helix.enums.TaskType;
-import helix.enums.TaskStatus;
 import helix.enums.OutputSymbol;
+import helix.enums.TaskStatus;
+import helix.enums.TaskType;
 
 /**
  * Abstract base class representing a generic helix.task.

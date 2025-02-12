@@ -1,20 +1,18 @@
 package helix.command;
 
+import java.util.Locale;
+
 import helix.enums.CommandType;
 import helix.enums.TaskType;
-
 import helix.exception.HelixException;
 import helix.exception.InvalidCommandException;
 import helix.exception.InvalidDateFormatException;
+import helix.exception.InvalidNumberFormatException;
 import helix.exception.MissingArgumentException;
 import helix.exception.TooManyArgumentsException;
-import helix.exception.InvalidNumberFormatException;
-
 import helix.task.Deadline;
 import helix.task.Event;
 import helix.task.Todo;
-
-import java.util.Locale;
 
 /**
  * Factory class for creating Command instances based on user input.
@@ -42,14 +40,15 @@ public class CommandFactory {
         }
 
         return switch (commandType) {
-            case TODO -> createTodoCommand(args);
-            case DEADLINE -> createDeadlineCommand(args);
-            case EVENT -> createEventCommand(args);
-            case LIST -> createListCommand(args);
-            case MARK -> createMarkCommand(args);
-            case UNMARK -> createUnmarkCommand(args);
-            case DELETE -> createDeleteCommand(args);
-            case BYE -> createExitCommand(args);
+        case TODO -> createTodoCommand(args);
+        case DEADLINE -> createDeadlineCommand(args);
+        case EVENT -> createEventCommand(args);
+        case LIST -> createListCommand(args);
+        case MARK -> createMarkCommand(args);
+        case UNMARK -> createUnmarkCommand(args);
+        case DELETE -> createDeleteCommand(args);
+        case BYE -> createExitCommand(args);
+        case FIND -> createFindCommand(args);
         };
     }
 
@@ -143,9 +142,9 @@ public class CommandFactory {
             );
         } catch (IllegalArgumentException e) {
             throw new InvalidDateFormatException(
-                    "Invalid date format. Supported formats:\n" +
-                            "1. d/M/yyyy HHmm\n" +
-                            "2. yyyy-MM-dd HHmm."
+                    "Invalid date format. Supported formats:\n"
+                        + "1. d/M/yyyy HHmm\n"
+                        + "2. yyyy-MM-dd HHmm."
             );
         }
     }
@@ -277,5 +276,19 @@ public class CommandFactory {
             );
         }
         return new DeleteCommand(Integer.parseInt(args) - 1);
+    }
+
+    /**
+     * Creates a FindCommand instance after validating arguments.
+     *
+     * @param args the arguments for the find command
+     * @return a FindCommand instance
+     * @throws MissingArgumentException if the keyword is missing
+     */
+    private static Command createFindCommand(String args) throws HelixException {
+        if (args.isEmpty()) {
+            throw new MissingArgumentException("find", "find <keyword>");
+        }
+        return new FindCommand(args);
     }
 }

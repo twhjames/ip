@@ -1,12 +1,12 @@
 package helix.task;
 
-import helix.enums.OutputSymbol;
-import helix.storage.Storage;
-import helix.ui.Ui;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+
+import helix.enums.OutputSymbol;
+import helix.storage.Storage;
+import helix.ui.ConsoleUi;
 
 /**
  * Represents a helix.task manager that maintains a list of tasks, allowing for operations such as adding,
@@ -32,24 +32,24 @@ public class TaskList {
      * Adds a new helix.task to the TaskList and updates the helix.storage.
      *
      * @param task the {@link Task} to be added
-     * @param ui the {@link Ui} component used to display messages to the user
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user
      */
-    public void addTask(Task task, Ui ui) {
+    public void addTask(Task task, ConsoleUi consoleUi) {
         this.tasks.add(task);
-        updateStorage(ui);
+        updateStorage(consoleUi);
     }
 
     /**
      * Removes a helix.task from the TaskList by its index and updates the helix.storage.
      *
      * @param taskIndex the index of the helix.task to be removed (0-based index)
-     * @param ui the {@link Ui} component used to display messages to the user
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user
      * @return the {@link Task} that was removed
      * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public Task removeTask(int taskIndex, Ui ui) {
+    public Task removeTask(int taskIndex, ConsoleUi consoleUi) {
         Task task = this.tasks.remove(taskIndex);
-        updateStorage(ui);
+        updateStorage(consoleUi);
         return task;
     }
 
@@ -57,26 +57,26 @@ public class TaskList {
      * Marks a helix.task as done based on its index and updates the helix.storage.
      *
      * @param taskIndex the index of the helix.task to mark as done (0-based index)
-     * @param ui the {@link Ui} component used to display messages to the user
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user
      * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public void markTaskAsDone(int taskIndex, Ui ui) {
+    public void markTaskAsDone(int taskIndex, ConsoleUi consoleUi) {
         Task task = this.tasks.get(taskIndex);
         task.markAsDone();
-        updateStorage(ui);
+        updateStorage(consoleUi);
     }
 
     /**
      * Marks a helix.task as not done based on its index and updates the helix.storage.
      *
      * @param taskIndex the index of the helix.task to mark as not done (0-based index)
-     * @param ui the {@link Ui} component used to display messages to the user
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user
      * @throws IndexOutOfBoundsException if the {@code taskIndex} is out of range
      */
-    public void markTaskAsUndone(int taskIndex, Ui ui) {
+    public void markTaskAsUndone(int taskIndex, ConsoleUi consoleUi) {
         Task task = this.tasks.get(taskIndex);
         task.markAsUndone();
-        updateStorage(ui);
+        updateStorage(consoleUi);
     }
 
     /**
@@ -111,14 +111,14 @@ public class TaskList {
     /**
      * Updates the current state of the tasks to the helix.storage. If saving fails, logs a warning message.
      *
-     * @param ui the {@link Ui} component used to display messages to the user
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user
      */
-    private void updateStorage(Ui ui) {
+    private void updateStorage(ConsoleUi consoleUi) {
         try {
             storage.save(tasks);
         } catch (IOException e) {
             String warningSymbol = OutputSymbol.WARNING.getSymbol();
-            ui.showSavingStorageError(e.getMessage());
+            consoleUi.showSavingStorageError(e.getMessage());
         }
     }
 }

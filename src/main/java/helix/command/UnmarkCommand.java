@@ -6,7 +6,7 @@ import helix.exception.HelixException;
 import helix.exception.TaskIndexOutOfBoundsException;
 import helix.task.Task;
 import helix.task.TaskList;
-import helix.ui.Ui;
+import helix.ui.ConsoleUi;
 
 /**
  * A helix.command to mark a helix.task as not done in the TaskList.
@@ -29,11 +29,11 @@ public class UnmarkCommand extends Command {
      * Executes the unmark helix.command, marking the specified helix.task as not done.
      *
      * @param taskList the TaskList containing the helix.task to be updated
-     * @param ui the Ui component used to display messages to the user
+     * @param consoleUi the ConsoleUi component used to display messages to the user
      * @throws HelixException if the helix.task index is invalid
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws HelixException {
+    public void execute(TaskList taskList, ConsoleUi consoleUi) throws HelixException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
@@ -41,12 +41,12 @@ public class UnmarkCommand extends Command {
         // get the helix.task
         Task task = taskList.getTask(taskIndex);
 
-        // handle helix.task status and notify via Ui
+        // handle helix.task status and notify via ConsoleUi
         if (task.getTaskStatus() != TaskStatus.COMPLETED) {
-            ui.showTaskAlreadyPending();
+            consoleUi.showTaskAlreadyPending();
         } else {
-            taskList.markTaskAsUndone(taskIndex, ui);
-            ui.showTaskMarkedPending(task);
+            taskList.markTaskAsUndone(taskIndex, consoleUi);
+            consoleUi.showTaskMarkedPending(task);
         }
     }
 }

@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when an invalid helix.command is entered.
+ * Exception thrown when an invalid command is entered.
  */
 public class InvalidCommandException extends HelixException {
 
@@ -10,6 +10,6 @@ public class InvalidCommandException extends HelixException {
      * prompting the user to check the list of valid commands.
      */
     public InvalidCommandException() {
-        super("Invalid helix.command. Type 'help' for a list of commands.");
+        super("Invalid command. Type 'help' for a list of commands.");
     }
 }
