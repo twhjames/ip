@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClass.set("helix.gui.Launcher")
+    mainClass.set("helix.ui.Launcher")
 }
 
 shadowJar {
