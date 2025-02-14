@@ -18,6 +18,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Updates the description of the Todo task.
+     *
+     * @param newDetails The new description of the todo task.
+     */
+    @Override
+    public void updateTaskDetails(String newDetails) {
+        setDescription(newDetails);
+    }
+
+    /**
      * Gets the type of the helix.task.
      *
      * @return A TaskType enum representing the type of the helix.task (TODO).

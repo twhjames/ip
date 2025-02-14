@@ -54,6 +54,19 @@ public class TaskList {
     }
 
     /**
+     * Updates the details of an existing task and synchronizes changes with storage.
+     *
+     * @param taskIndex the index of the task to update (0-based index).
+     * @param newDetails the new details of the task (format varies based on task type).
+     * @param consoleUi the {@link ConsoleUi} component used to display messages to the user.
+     */
+    public void updateTask(int taskIndex, String newDetails, ConsoleUi consoleUi) {
+        Task task = this.tasks.get(taskIndex);
+        task.updateTaskDetails(newDetails);
+        updateStorage(consoleUi);
+    }
+
+    /**
      * Marks a helix.task as done based on its index and updates the helix.storage.
      *
      * @param taskIndex the index of the helix.task to mark as done (0-based index)

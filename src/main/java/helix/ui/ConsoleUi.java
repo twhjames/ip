@@ -317,6 +317,16 @@ public class ConsoleUi {
     }
 
     /**
+     * Displays a message indicating that a task has been successfully updated.
+     *
+     * @param task The task that was updated.
+     */
+    public void showTaskUpdated(Task task) {
+        System.out.println(helixSymbol + " [Helix] : Task updated successfully:\n  " + task + "\n");
+        lastMessage = checkSymbol + " Task updated successfully!\n" + "    " + task;
+    }
+
+    /**
      * Retrieves the last message displayed by the ConsoleUi.
      *
      * @return the last message as a String
