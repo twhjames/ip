@@ -12,4 +12,13 @@ public class InvalidCommandException extends HelixException {
     public InvalidCommandException() {
         super("Invalid command. Type 'help' for a list of commands.");
     }
+
+    /**
+     * Constructs an InvalidCommandException with a specific error message.
+     *
+     * @param message The detailed error message.
+     */
+    public InvalidCommandException(String message) {
+        super(message);
+    }
 }

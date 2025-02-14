@@ -9,7 +9,7 @@ import helix.enums.TaskType;
  * Task contains a description and a completion status.
  */
 public abstract class Task {
-    private final String description;
+    private String description;
     private TaskStatus taskStatus;
 
     /**
@@ -67,6 +67,28 @@ public abstract class Task {
      * @return Additional details about the helix.task.
      */
     public abstract String getTaskDetails();
+
+    /**
+     * Updates the task details based on the provided new details.
+     * <p>
+     * Each subclass should implement this method to handle task-specific updates,
+     * such as modifying the description, deadlines, or event timings.
+     * </p>
+     *
+     * @param newDetails The updated task details.
+     * @throws IllegalArgumentException if the new details format is invalid.
+     */
+    public abstract void updateTaskDetails(String newDetails);
+
+    /**
+     * Sets or updates the task description.
+     *
+     * @param description The new task description.
+     * @throws IllegalArgumentException if the description is null or empty.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     /**
      * Returns a string representation of the helix.task, including its completion status.

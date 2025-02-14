@@ -19,7 +19,7 @@ public class Deadline extends Task {
     };
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 
-    private final LocalDateTime dueDate;
+    private LocalDateTime dueDate;
 
     /**
      * Constructs a Deadline helix.task.
@@ -31,6 +31,20 @@ public class Deadline extends Task {
     public Deadline(String description, String dueDate) throws IllegalArgumentException {
         super(description);
         this.dueDate = parseDueDate(dueDate);
+    }
+
+    /**
+     * Updates the deadline task details, including its description and due date.
+     *
+     * @param newDetails The new details for the deadline task in the format:
+     *                   {@code "<description> - <due date>"}.
+     * @throws IllegalArgumentException If the format is incorrect.
+     */
+    @Override
+    public void updateTaskDetails(String newDetails) {
+        String[] parts = newDetails.split(" - ");
+        setDescription(parts[0]);
+        this.dueDate = parseDueDate(parts[1]);
     }
 
     /**

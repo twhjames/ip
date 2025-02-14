@@ -18,8 +18,8 @@ public class Event extends Task {
             DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a") // Format: Oct 11 2019, 5:00 pm
     };
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-    private final LocalDateTime startDateTime;
-    private final LocalDateTime endDateTime;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
 
     /**
      * Constructs an Event helix.task with the specified description, start time, and end time.
@@ -40,6 +40,22 @@ public class Event extends Task {
         if (this.startDateTime.isAfter(this.endDateTime)) {
             throw new IllegalArgumentException("End time must be after start time.");
         }
+    }
+
+    /**
+     * Updates the event task details, including its description, start time, and end time.
+     *
+     * @param newDetails The new details for the event task in the format:
+     *                   {@code "<description> - <start time> - <end time>"}
+     * @throws IllegalArgumentException If the format is incorrect.
+     */
+    @Override
+    public void updateTaskDetails(String newDetails) {
+        String[] parts = newDetails.split(" - ");
+        setDescription(parts[0]);
+        this.startDateTime = parseDateTime(parts[1]);
+        this.endDateTime = parseDateTime(parts[2]);
+
     }
 
     /**

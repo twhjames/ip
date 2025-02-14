@@ -50,6 +50,7 @@ public class CommandFactory {
         case DELETE -> createDeleteCommand(args);
         case BYE -> createExitCommand(args);
         case FIND -> createFindCommand(args);
+        case UPDATE -> createUpdateCommand(args);
         };
     }
 
@@ -272,5 +273,39 @@ public class CommandFactory {
             throw new MissingArgumentException("find", "find <keyword>");
         }
         return new FindCommand(args);
+    }
+
+    /**
+     * Creates an {@link UpdateCommand} after validating arguments.
+     *
+     * @param args the arguments for the {@code update} command (task number, task type, new details)
+     * @return an {@link UpdateCommand} instance
+     * @throws MissingArgumentException if any required argument is missing
+     * @throws InvalidNumberFormatException if the task number is not a valid positive integer
+     * @throws InvalidCommandException if the task type is not recognized
+     */
+    private static Command createUpdateCommand(String args) throws HelixException {
+        if (args.isEmpty()) {
+            throw new MissingArgumentException("update", "update <taskNum> <taskType> <newDetails>");
+        }
+
+        String[] parts = args.split(" ", 3);
+        if (parts.length < 3) {
+            throw new MissingArgumentException("update", "update <taskNum> <taskType> <newDetails>");
+        }
+
+        if (!parts[0].matches("\\d+")) {
+            throw new InvalidNumberFormatException("Invalid task number. Must be a positive integer.");
+        }
+        int taskIndex = Integer.parseInt(parts[0]) - 1;
+
+        TaskType taskType;
+        try {
+            taskType = TaskType.valueOf(parts[1].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCommandException();
+        }
+        String newDetails = parts[2];
+        return new UpdateCommand(taskIndex, taskType, newDetails);
     }
 }

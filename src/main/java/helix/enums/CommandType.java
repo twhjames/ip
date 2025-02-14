@@ -47,5 +47,10 @@ public enum CommandType {
     /**
      * Command to find tasks based on a keyword in their description.
      */
-    FIND;
+    FIND,
+
+    /**
+     * Command to update task details (description and/or dates).
+     */
+    UPDATE;
 }
