@@ -33,10 +33,19 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, ConsoleUi consoleUi) {
-        List<Task> matchingTasks = taskList.getTasks().stream()
+        List<Task> matchingTasks = findMatchingTasks(taskList);
+        consoleUi.showMatchingTasks(matchingTasks);
+    }
+
+    /**
+     * Retrieves tasks that contain the specified keyword.
+     *
+     * @param taskList the {@code TaskList} containing the tasks to search
+     * @return a list of tasks that match the search keyword
+     */
+    private List<Task> findMatchingTasks(TaskList taskList) {
+        return taskList.getTasks().stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
-
-        consoleUi.showMatchingTasks(matchingTasks);
     }
 }

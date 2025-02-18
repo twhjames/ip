@@ -43,20 +43,34 @@ public class Storage {
      * @throws IOException if there is an error reading the file
      */
     public List<Task> load() throws IOException {
-        // check if helix.storage folder and file exists
-        if (!Files.exists(filePath)) {
-            Files.createDirectories(filePath.getParent()); // create directory if it does not exist
-            Files.createFile(filePath); // create file if it does not exist
-            return new ArrayList<>(); // return an empty list for first-time use
-        }
+        ensureFileExists();
+        return readTasksFromFile();
+    }
 
-        // helix.storage file exists, read and populate taskList
+    /**
+     * Ensures the storage file exists, creating it if necessary.
+     *
+     * @throws IOException if an error occurs while creating the file
+     */
+    private void ensureFileExists() throws IOException {
+        if (!Files.exists(filePath)) {
+            Files.createDirectories(filePath.getParent());
+            Files.createFile(filePath);
+        }
+    }
+
+    /**
+     * Reads tasks from the storage file.
+     *
+     * @return a list of tasks loaded from the file
+     * @throws IOException if an error occurs while reading the file
+     */
+    private List<Task> readTasksFromFile() throws IOException {
         List<Task> taskList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath.toFile()))) {
-            String line = br.readLine();
-            while (line != null) {
-                taskList.add(Storage.parseTask(line));
-                line = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
+                taskList.add(parseTask(line));
             }
         }
         return taskList;
@@ -70,9 +84,19 @@ public class Storage {
      * @throws IOException if there is an error writing to the file
      */
     public void save(List<Task> taskList) throws IOException {
+        writeTasksToFile(taskList);
+    }
+
+    /**
+     * Writes the given tasks to the storage file.
+     *
+     * @param taskList the list of tasks to write
+     * @throws IOException if an error occurs while writing to the file
+     */
+    private void writeTasksToFile(List<Task> taskList) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
             for (Task task : taskList) {
-                writer.write(Storage.serialiseTask(task));
+                writer.write(serialiseTask(task));
                 writer.newLine();
             }
         }
@@ -93,36 +117,33 @@ public class Storage {
             TaskStatus taskStatus = TaskStatus.valueOf(parts[1]);
             String description = parts[2];
 
-            return switch (taskType) {
-            case TODO -> {
-                Todo todo = new Todo(description);
-                if (taskStatus == TaskStatus.COMPLETED) {
-                    todo.markAsDone();
-                }
-                yield todo;
+            Task task = createTaskByType(taskType, description, parts);
+            if (taskStatus == TaskStatus.COMPLETED) {
+                task.markAsDone();
             }
-            case DEADLINE -> {
-                String duedate = parts[3];
-                Deadline deadline = new Deadline(description, duedate);
-                if (taskStatus == TaskStatus.COMPLETED) {
-                    deadline.markAsDone();
-                }
-                yield deadline;
-            }
-            case EVENT -> {
-                String[] eventDuration = parts[3].split(" - ");
-                String startDateTime = eventDuration[0];
-                String endDateTime = eventDuration[1];
-                Event event = new Event(description, startDateTime, endDateTime);
-                if (taskStatus == TaskStatus.COMPLETED) {
-                    event.markAsDone();
-                }
-                yield event;
-            }
-            };
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Error parsing helix.task: " + line, e);
+            return task;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error parsing task: " + line, e);
         }
+    }
+
+    /**
+     * Factory method to create tasks based on their type.
+     *
+     * @param taskType    The type of task.
+     * @param description The task description.
+     * @param parts       The serialized task parts.
+     * @return The corresponding {@link Task} object.
+     */
+    private static Task createTaskByType(TaskType taskType, String description, String[] parts) {
+        return switch (taskType) {
+        case TODO -> new Todo(description);
+        case DEADLINE -> new Deadline(description, parts[3]);
+        case EVENT -> {
+            String[] eventDuration = parts[3].split(" - ");
+            yield new Event(description, eventDuration[0], eventDuration[1]);
+        }
+        };
     }
 
     /**

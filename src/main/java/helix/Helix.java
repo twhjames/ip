@@ -21,43 +21,42 @@ import helix.ui.ConsoleUi;
  * </p>
  */
 public class Helix {
-
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private ConsoleUi consoleUi;
+    private final ConsoleUi consoleUi;
 
     /**
-     * Constructs a new instance of the Helix application with the specified storage file path.
-     *
-     * <p>
-     * This constructor initializes the user interface and storage components, determines
-     * the resolved file path for the storage file, and attempts to load the task list from
-     * the storage. If the task list cannot be loaded due to an I/O error, it initializes
-     * an empty task list and displays an error message.
-     * </p>
+     * Constructs a new instance of the Helix application.
      *
      * @param filePath The file path to the storage file where tasks are saved and loaded.
      */
     public Helix(String filePath) {
-        // Initialize ConsoleUi component
-        consoleUi = new ConsoleUi();
+        this.consoleUi = new ConsoleUi();
+        String resolvedFilePath = resolveFilePath();
+        this.storage = new Storage(resolvedFilePath);
+        initializeTaskList();
+    }
 
-        // Resolve the file path using the FilePath enum
+    /**
+     * Resolves the correct file path based on the execution environment.
+     *
+     * @return The absolute file path for storage.
+     */
+    private String resolveFilePath() {
         String storageFile = FilePath.STORAGE_FILE.getPath();
-        String resolvedFilePath;
-        if (System.getProperty("user.dir").contains("text-consoleUi-test")) {
-            // Running from the `text-consoleUi-test` folder
-            resolvedFilePath = Paths.get("..", storageFile).toAbsolutePath().normalize().toString();
-        } else {
-            // Running from the project root
-            resolvedFilePath = Paths.get(storageFile).toAbsolutePath().normalize().toString();
-        }
+        return System.getProperty("user.dir").contains("text-consoleUi-test")
+                ? Paths.get("..", storageFile).toAbsolutePath().normalize().toString()
+                : Paths.get(storageFile).toAbsolutePath().normalize().toString();
+    }
 
-        // Load tasks from storage
-        storage = new Storage(resolvedFilePath);
+    /**
+     * Initializes the task list from storage.
+     * Displays an error message if loading fails.
+     */
+    private void initializeTaskList() {
         try {
-            taskList = new TaskList(storage);
-            assert taskList != null : "taskList is initialization failed!";
+            this.taskList = new TaskList(storage);
+            assert taskList != null : "TaskList initialization failed!";
         } catch (IOException e) {
             consoleUi.showLoadingStorageError();
         }
@@ -66,24 +65,13 @@ public class Helix {
     /**
      * Executes a user command and returns the response message.
      *
-     * <p>
-     * This method parses the user input, delegates the command execution to the appropriate
-     * command class, and returns the result of the execution. If any exceptions are thrown
-     * during parsing or execution, the method catches and returns an appropriate error message.
-     * </p>
-     *
-     * @param userInput The user input string representing the command to be executed.
-     * @return A string containing the result of the command execution or an error message.
+     * @param userInput The user input string representing the command.
+     * @return A string containing the result of execution or an error message.
      */
     public String executeCommand(String userInput) {
         try {
-            // Parse command from input and instantiate the Command object
             Command command = CommandFactory.parseCommand(userInput);
-
-            // Execute the command using polymorphism
             command.execute(taskList, consoleUi);
-
-            // Return the last message displayed by the ConsoleUi
             return consoleUi.getLastMessage();
         } catch (HelixException e) {
             return e.getFormattedMessage();
@@ -94,11 +82,6 @@ public class Helix {
 
     /**
      * Starts the Helix application.
-     *
-     * <p>
-     * This method initializes and runs the application. It serves as the starting point
-     * for executing the Helix program when run from the command line.
-     * </p>
      *
      * @param args Command-line arguments (not used in this application).
      */

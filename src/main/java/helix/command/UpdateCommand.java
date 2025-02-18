@@ -57,46 +57,89 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, ConsoleUi consoleUi) throws HelixException {
-        // Validate task number
+        validateTaskIndex(taskList);
+        Task task = taskList.getTask(taskIndex);
+        validateTaskType(task);
+
+        String formattedDetails = parseNewDetails(expectedType, newDetails);
+
+        taskList.updateTask(taskIndex, formattedDetails, consoleUi);
+        consoleUi.showTaskUpdated(task);
+    }
+
+    /**
+     * Validates that the task index is within the valid range.
+     *
+     * @param taskList The {@code TaskList} containing the tasks.
+     * @throws TaskIndexOutOfBoundsException if the index is invalid.
+     */
+    private void validateTaskIndex(TaskList taskList) throws TaskIndexOutOfBoundsException {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskCount()) {
             throw new TaskIndexOutOfBoundsException(taskIndex + 1, taskList.getTaskCount());
         }
+    }
 
-        // Retrieve task
-        Task task = taskList.getTask(taskIndex);
-
-        // Validate task type
+    /**
+     * Validates that the task type matches the expected type.
+     *
+     * @param task The task to check.
+     * @throws InvalidTaskTypeException if the task type does not match.
+     */
+    private void validateTaskType(Task task) throws InvalidTaskTypeException {
         if (task.getTaskType() != expectedType) {
             throw new InvalidTaskTypeException("Task type mismatch. Expected: " + task.getTaskType());
         }
+    }
 
-        // Update based on task type
-        switch (expectedType) {
-        case TODO: task.updateTaskDetails(newDetails);
-            break;
-        case DEADLINE:
-            String[] deadlineParts = newDetails.split(" /by ", 2);
-            if (deadlineParts.length != 2) {
-                throw new InvalidCommandException(
-                        "Invalid format. Use: update <taskNum> deadline <description> /by <due date>"
-                );
-            }
-            task.updateTaskDetails(deadlineParts[0] + " - " + deadlineParts[1]);
-            break;
-        case EVENT:
-            String[] eventParts = newDetails.split(" /from | /to ");
-            if (eventParts.length != 3) {
-                throw new InvalidCommandException(
-                        "Invalid format. Use: update <taskNum> event <description> /from <start> /to <end>"
-                );
-            }
-            task.updateTaskDetails(eventParts[0] + " - " + eventParts[1] + " - " + eventParts[2]);
-            break;
-        default:
-            throw new InvalidTaskTypeException("Unsupported task type.");
+    /**
+     * Parses and formats the new task details based on the expected task type.
+     *
+     * @param taskType The type of task being updated.
+     * @param details The raw user input details.
+     * @return The formatted details string.
+     * @throws HelixException If the task index is invalid or the task type does not match.
+     * @throws InvalidCommandException If the new details are in an invalid format.
+     */
+    private String parseNewDetails(TaskType taskType, String details) throws HelixException {
+        return switch (taskType) {
+        case TODO -> details;
+        case DEADLINE -> parseDeadlineDetails(details);
+        case EVENT -> parseEventDetails(details);
+        default -> throw new InvalidTaskTypeException("Unsupported task type.");
+        };
+    }
+
+    /**
+     * Parses the details for a deadline task.
+     *
+     * @param details The raw user input details.
+     * @return The formatted deadline details.
+     * @throws InvalidCommandException if the format is invalid.
+     */
+    private String parseDeadlineDetails(String details) throws InvalidCommandException {
+        String[] deadlineParts = details.split(" /by ", 2);
+        if (deadlineParts.length != 2) {
+            throw new InvalidCommandException(
+                    "Invalid format. Use: update <taskNum> deadline <description> /by <due date>"
+            );
         }
+        return deadlineParts[0] + " - " + deadlineParts[1];
+    }
 
-        taskList.updateTask(taskIndex, newDetails, consoleUi);
-        consoleUi.showTaskUpdated(task);
+    /**
+     * Parses the details for an event task.
+     *
+     * @param details The raw user input details.
+     * @return The formatted event details.
+     * @throws InvalidCommandException if the format is invalid.
+     */
+    private String parseEventDetails(String details) throws InvalidCommandException {
+        String[] eventParts = details.split(" /from | /to ");
+        if (eventParts.length != 3) {
+            throw new InvalidCommandException(
+                    "Invalid format. Use: update <taskNum> event <description> /from <start> /to <end>"
+            );
+        }
+        return eventParts[0] + " - " + eventParts[1] + " - " + eventParts[2];
     }
 }
