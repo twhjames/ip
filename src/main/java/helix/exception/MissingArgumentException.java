@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when a command is missing required arguments.
+ * Signals that a required argument is missing for a command.
  */
 public class MissingArgumentException extends HelixException {
 

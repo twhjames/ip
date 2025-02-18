@@ -15,7 +15,7 @@ import helix.task.Event;
 import helix.task.Todo;
 
 /**
- * Factory class for creating Command instances based on user input.
+ * Creates {@code Command} instances based on user input.
  */
 public class CommandFactory {
 

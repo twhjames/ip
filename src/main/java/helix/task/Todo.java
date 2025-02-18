@@ -4,7 +4,6 @@ import helix.enums.TaskType;
 
 /**
  * Represents a todo helix.task with a description.
- * Inherits from the Task class.
  */
 public class Todo extends Task {
 

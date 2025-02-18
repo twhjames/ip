@@ -8,8 +8,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A helix.command to delete a helix.task from the helix.task list.
- * Inherits from the Command class.
+ * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
     private final int taskIndex;

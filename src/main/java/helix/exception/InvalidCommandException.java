@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when an invalid command is entered.
+ * Signals that an invalid command has been entered.
  */
 public class InvalidCommandException extends HelixException {
 

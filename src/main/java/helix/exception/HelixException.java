@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Base class for all helix.Helix-related exceptions.
+ * Represents the base class for all Helix-related exceptions.
  */
 public abstract class HelixException extends Exception {
 

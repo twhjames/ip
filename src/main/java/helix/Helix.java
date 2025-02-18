@@ -12,7 +12,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * The main class for the Helix personal assistant application.
+ * Initializes and runs the Helix application.
  *
  * <p>
  * This class serves as the entry point for the Helix application, managing the initialization
@@ -93,7 +93,7 @@ public class Helix {
     }
 
     /**
-     * The main entry point of the Helix application.
+     * Starts the Helix application.
      *
      * <p>
      * This method initializes and runs the application. It serves as the starting point

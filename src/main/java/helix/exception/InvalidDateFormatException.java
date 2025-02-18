@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when a date format is invalid.
+ * Signals that an invalid date format has been encountered.
  */
 public class InvalidDateFormatException extends HelixException {
 

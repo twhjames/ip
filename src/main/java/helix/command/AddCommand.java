@@ -6,8 +6,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A helix.command to add a helix.task to the TaskList.
- * Inherits from the Command class.
+ * Represents a command to add a task to the task list.
  */
 public class AddCommand extends Command {
     private final Task task;

@@ -14,7 +14,7 @@ import helix.task.Task;
 import helix.task.Todo;
 
 /**
- * Unit tests for the {@link Storage} class, ensuring the correct behavior for saving and loading tasks.
+ * Tests the behavior of the {@code Storage} class.
  */
 public class StorageTest {
 

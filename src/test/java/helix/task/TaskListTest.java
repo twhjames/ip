@@ -11,7 +11,8 @@ import helix.stub.StubStorage;
 import helix.ui.ConsoleUi;
 
 /**
- * Unit tests for the {@link TaskList} class.
+ * Tests the behavior of the {@code TaskList} class.
+ *
  * <p>
  * This class verifies the behavior of the {@link TaskList} methods, such as adding and removing tasks,
  * using a {@link StubStorage} to avoid dependencies on external storage.
@@ -25,6 +26,7 @@ public class TaskListTest {
 
     /**
      * Sets up the testing environment before each test.
+     *
      * <p>
      * A new {@link TaskList} is initialized with a {@link StubStorage} to avoid file I/O operations,
      * and a {@link ConsoleUi} instance is created for use in the tests.
@@ -41,6 +43,7 @@ public class TaskListTest {
 
     /**
      * Tests the {@link TaskList#addTask(Task, ConsoleUi)} method.
+     *
      * <p>
      * Verifies that a valid {@link Task} can be successfully added to the task list and ensures that
      * the task count and task description are correct after the addition.
@@ -56,6 +59,7 @@ public class TaskListTest {
 
     /**
      * Tests the {@link TaskList#removeTask(int, ConsoleUi)} method.
+     *
      * <p>
      * Verifies that a task can be successfully removed from the task list by its index and ensures that
      * the task count is updated correctly after the removal.

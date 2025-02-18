@@ -8,7 +8,6 @@ import helix.enums.TaskType;
 
 /**
  * Represents an event helix.task with a description, start time, and end time.
- * Inherits from the Task class.
  */
 public class Event extends Task {
 

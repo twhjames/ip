@@ -9,8 +9,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A helix.command to mark a helix.task as done in the TaskList.
- * Inherits from the Command class.
+ * Represents a command to mark a task as done in the task list.
  */
 public class MarkCommand extends Command {
     private final int taskIndex;

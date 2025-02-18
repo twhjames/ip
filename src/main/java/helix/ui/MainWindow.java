@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for MainWindow. Provides the layout for the GUI.
+ * Controls the layout and interactions for the MainWindow GUI.
  */
 public class MainWindow {
     @FXML
@@ -26,11 +26,19 @@ public class MainWindow {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image helixImage = new Image(this.getClass().getResourceAsStream("/images/helix.png"));
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Helix instance for this controller.
+     *
+     * @param helix the Helix instance to be used for processing user commands
+     */
     public void setHelix(Helix helix) {
         this.helix = helix;
     }

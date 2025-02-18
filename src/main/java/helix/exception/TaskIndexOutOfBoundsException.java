@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when a helix.task index is out of bounds.
+ * Signals that a task index is out of bounds.
  */
 public class TaskIndexOutOfBoundsException extends HelixException {
 

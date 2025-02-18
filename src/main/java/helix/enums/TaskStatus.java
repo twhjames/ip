@@ -4,14 +4,7 @@ package helix.enums;
  * Represents the status of a helix.task.
  */
 public enum TaskStatus {
-    /**
-     * Task is pending and not yet completed.
-     */
     PENDING(false),
-
-    /**
-     * Task has been completed.
-     */
     COMPLETED(true);
 
     private final boolean isDone;

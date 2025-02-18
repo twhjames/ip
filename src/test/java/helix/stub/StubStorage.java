@@ -7,7 +7,8 @@ import helix.storage.Storage;
 import helix.task.Task;
 
 /**
- * A stub implementation of the {@link Storage} class for unit testing purposes.
+ * Implements a stub version of the {@code Storage} class for testing.
+ *
  * <p>
  * This class overrides methods in {@link Storage} to provide a simplified, in-memory
  * implementation without file I/O. It ensures that tests can run without dependencies

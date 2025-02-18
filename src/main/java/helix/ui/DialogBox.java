@@ -15,8 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * Represents a dialog box containing a speaker's image and text message.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -24,6 +23,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a dialog box with the given text and image.
+     *
+     * @param text the text message to be displayed
+     * @param img the speaker's image
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +54,24 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Creates a dialog box for user messages.
+     *
+     * @param text the text message from the user
+     * @param img the user's image
+     * @return a dialog box representing the user message
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box for Helix responses.
+     *
+     * @param text the text message from Helix
+     * @param img the Helix assistant's image
+     * @return a dialog box representing the Helix response
+     */
     public static DialogBox getHelixDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

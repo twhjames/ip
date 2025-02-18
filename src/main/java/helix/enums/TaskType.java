@@ -4,19 +4,9 @@ package helix.enums;
  * Represents the type of tasks in the system.
  */
 public enum TaskType {
-    /**
-     * A to-do helix.task.
-     */
+
     TODO("T"),
-
-    /**
-     * A helix.task with a deadline.
-     */
     DEADLINE("D"),
-
-    /**
-     * An event helix.task.
-     */
     EVENT("E");
 
     private final String code;

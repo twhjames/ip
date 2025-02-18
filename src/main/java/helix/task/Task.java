@@ -5,8 +5,7 @@ import helix.enums.TaskStatus;
 import helix.enums.TaskType;
 
 /**
- * Abstract base class representing a generic helix.task.
- * Task contains a description and a completion status.
+ * Represents a generic task in Helix.
  */
 public abstract class Task {
     private String description;
@@ -70,6 +69,7 @@ public abstract class Task {
 
     /**
      * Updates the task details based on the provided new details.
+     *
      * <p>
      * Each subclass should implement this method to handle task-specific updates,
      * such as modifying the description, deadlines, or event timings.

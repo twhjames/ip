@@ -7,8 +7,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * Abstract base class representing a generic helix.command.
- * Commands are executable actions that operate on a TaskList.
+ * Represents an executable command in the Helix application.
  */
 public abstract class Command {
 

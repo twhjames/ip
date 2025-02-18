@@ -9,7 +9,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A command to find tasks that match a keyword in their description.
+ * Represents a command to search for tasks containing a specific keyword.
  */
 public class FindCommand extends Command {
     private final String keyword;

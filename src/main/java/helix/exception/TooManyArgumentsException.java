@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when a command has more arguments than expected.
+ * Signals that a command has received more arguments than expected.
  */
 public class TooManyArgumentsException extends HelixException {
 

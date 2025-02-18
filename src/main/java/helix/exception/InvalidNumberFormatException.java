@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when an invalid number is provided as input.
+ * Signals that an invalid number format has been encountered.
  */
 public class InvalidNumberFormatException extends HelixException {
 

@@ -8,12 +8,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Main application class for the Helix GUI.
+ * Initializes and starts the Helix GUI application.
  */
 public class MainApp extends Application {
 
     private Helix helix = new Helix("data/helix_tasklist.txt");
 
+    /**
+     * Starts the Helix application.
+     *
+     * @param stage the primary stage for the JavaFX application
+     */
     @Override
     public void start(Stage stage) {
         try {

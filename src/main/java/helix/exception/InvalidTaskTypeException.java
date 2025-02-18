@@ -1,7 +1,7 @@
 package helix.exception;
 
 /**
- * Exception thrown when an invalid task type is encountered.
+ * Signals that an invalid task type has been encountered.
  */
 public class InvalidTaskTypeException extends HelixException {
 

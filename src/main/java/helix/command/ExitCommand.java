@@ -6,8 +6,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A helix.command to terminate the application.
- * Inherits from the Command class.
+ * Represents a command to terminate the application.
  */
 public class ExitCommand extends Command {
 

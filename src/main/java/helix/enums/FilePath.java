@@ -1,7 +1,7 @@
 package helix.enums;
 
 /**
- * Enum for managing file and folder paths used in the application.
+ * Defines file and folder paths used in the Helix application.
  */
 public enum FilePath {
     STORAGE_FILE("data/helix_tasklist.txt");

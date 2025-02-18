@@ -8,8 +8,7 @@ import helix.task.TaskList;
 import helix.ui.ConsoleUi;
 
 /**
- * A helix.command to list all tasks in the TaskList.
- * Inherits from the Command class.
+ * Represents a command to list all tasks in the task list.
  */
 public class ListCommand extends Command {
 

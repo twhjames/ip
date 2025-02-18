@@ -8,7 +8,6 @@ import helix.enums.TaskType;
 
 /**
  * Represents a deadline helix.task with a description and a due date.
- * Inherits from the Task class.
  */
 public class Deadline extends Task {
 
