@@ -2,6 +2,7 @@ package helix.ui;
 
 import helix.Helix;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +14,6 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     private Helix helix = new Helix("data/helix_tasklist.txt");
-
     /**
      * Starts the Helix application.
      *
@@ -22,19 +22,49 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            stage.setMinHeight(220);
-            stage.setMinWidth(417);
-            // stage.setMaxWidth(417); // Add this if you didn't automatically resize elements
+            configureStage(stage);
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.setTitle("Helix - Personal Assistant");
-            fxmlLoader.<MainWindow>getController().setHelix(helix);
+            AnchorPane root = fxmlLoader.load();
+            setupScene(stage, root, fxmlLoader);
             stage.show();
-
         } catch (Exception e) {
-            e.printStackTrace();
+            handleException(e);
         }
+    }
+
+    /**
+     * Configures the stage properties.
+     */
+    private void configureStage(Stage stage) {
+        stage.setMinHeight(220);
+        stage.setMinWidth(417);
+        stage.setTitle("Helix - Personal Assistant");
+        stage.setOnCloseRequest(event -> handleExit());
+    }
+
+    /**
+     * Sets up the scene and controller.
+     */
+    private void setupScene(Stage stage, AnchorPane root, FXMLLoader fxmlLoader) {
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        MainWindow controller = fxmlLoader.getController();
+        controller.setHelix(helix);
+        controller.setCloseHandler(stage);
+    }
+
+    /**
+     * Handles application exit.
+     */
+    private void handleExit() {
+        System.out.println("Closing application...");
+        Platform.exit();
+    }
+
+    /**
+     * Handles exceptions gracefully.
+     */
+    private void handleException(Exception e) {
+        e.printStackTrace();
     }
 }
