@@ -30,7 +30,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Helix - Personal Assistant");
-            fxmlLoader.<MainWindow>getController().setHelix(helix); // inject the Helix instance
+            fxmlLoader.<MainWindow>getController().setHelix(helix);
             stage.show();
 
         } catch (Exception e) {
