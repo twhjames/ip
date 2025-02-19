@@ -1,26 +1,31 @@
 .root {
-    main-color: rgb(237, 255, 242);       /* Create a looked-up color called "main-color" within root. */
+    main-color: #1D1340;
     -fx-background-color: main-color;
+    -fx-background-image: url("../images/background_with_opacity.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
-    -fx-font: 20px "Arial";
+    -fx-background-color: #A480F2;
+    -fx-text-fill: #221426;
+    -fx-font: 20px "roboto";
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
-    -fx-font: italic bold 16px "Arial";
+    -fx-background-color: #6D4CBF;
+    -fx-text-fill: #F2F2F2;
+    -fx-font: bold 16px "Arial";
 }
 
 .button:hover {
-    -fx-background-color:cyan;
-    -fx-font-size: 18px;
+    -fx-background-color: #221426;
+    -fx-font-size: 20px;
 }
 
 .button:pressed {
-    -fx-background-color:orange;
-    -fx-font-size: 20px;
+    -fx-background-color: #37265e;
+    -fx-font-size: 18px;
 }
 
 .scroll-pane,
@@ -29,12 +34,11 @@
 }
 
 .scroll-bar {
-    -fx-font-size: 10px;  /* Change width of scroll bar. */
-    -fx-background-color: main-color;
+    -fx-background-color: #1D1340;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #ff9cb4;
+    -fx-background-color: #A480F2;
     -fx-background-radius: 1em;
 }
 
@@ -44,4 +48,3 @@
     -fx-pref-height: 0;
     -fx-opacity: 0;
 }
-
