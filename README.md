@@ -1,21 +1,22 @@
-### helix.Helix Chatbot: Your Personal Task Manager
+### Helix Chatbot: Your Personal Task Manager
 
-helix.Helix is a simple, intuitive, and interactive chatbot designed to help you manage your tasks efficiently. Whether you're adding to-dos, setting deadlines, or planning events, helix.Helix is here to assist you every step of the way.
+Helix is a simple, intuitive, and interactive chatbot designed to help you manage your tasks efficiently. Whether you're adding to-dos, setting deadlines, or planning events, Helix is here to assist you every step of the way.
 
 ---
 
-## Features
+## **Features**
 
 1. **Task Management**:
-   - Add tasks to your helix.task list (To-Dos, Deadlines, Events).
+   - Add tasks to your list (To-Dos, Deadlines, Events).
    - Mark tasks as completed or unmark them.
    - Delete tasks when no longer needed.
+   - Find tasks by description.
+   - Update specific task details.
+   - List all tasks.
 
-2. **Interactive Commands**:
-   - View a list of all your tasks.
-   - Exit the chatbot with a friendly farewell message.
-
-More features pending.
+2. **Interactive Chatbot**:
+   - Manage your tasks through a **chat-style GUI**.
+   - Simple command-based task management.
 
 ---
 
@@ -45,24 +46,26 @@ More features pending.
 
 ---
 
-## Usage
+## **Usage**
 
-Here are the commands you can use with helix.Helix:
+Helix operates entirely through its **GUI interface**. Here are some actions you can perform:
 
 | Command       | Description                                                                 |
-|---------------|-----------------------------------------------------------------------------|
-| `todo <description>` | Adds a simple to-do helix.task. Example: `todo Read a book`                   |
-| `deadline <description> /by <due date>` | Adds a helix.task with a deadline. Example: `deadline Submit report /by 2025-01-30` |
-| `event <description> /from <start time> /to <end time>` | Adds an event helix.task. Example: `event Team meeting /from 10am /to 12pm` |
+|--------------|-----------------------------------------------------------------------------|
+| `add todo <description>` | Adds a simple to-do task. Example: `add todo Read a book`                   |
+| `add deadline <description> /by <due date>` | Adds a task with a deadline. Example: `add deadline Submit report /by 2025-01-30` |
+| `add event <description> /from <start time> /to <end time>` | Adds an event. Example: `add event Team meeting /from 10am /to 12pm` |
 | `list`        | Displays all the tasks in your list.                                        |
-| `mark <helix.task number>` | Marks the specified helix.task as done. Example: `mark 1`                      |
-| `unmark <helix.task number>` | Marks the specified helix.task as not done. Example: `unmark 1`              |
-| `delete <helix.task number>` | Deletes the specified helix.task. Example: `delete 1`                       |
+| `mark <task number>` | Marks the specified task as done. Example: `mark 1`                      |
+| `unmark <task number>` | Marks the specified task as not done. Example: `unmark 1`              |
+| `delete <task number>` | Deletes the specified task. Example: `delete 1`                       |
+| `find <keyword>` | Finds all tasks that contain the keyword. Example: `find groceries`        |
+| `update <task number> <task type> <new details>` | Updates an existing task. Example: `update 2 deadline Submit final report /by 2025-01-01 1200` |
 | `bye`         | Exits the chatbot.                                                         |
 
 ---
 
-## Project Structure
+## **Project Structure**
 
 ```
 src/
@@ -72,9 +75,11 @@ src/
 │   ├── CommandFactory.java
 │   ├── DeleteCommand.java
 │   ├── ExitCommand.java
+│   ├── FindCommand.java
 │   ├── ListCommand.java
 │   ├── MarkCommand.java
 │   ├── UnmarkCommand.java
+│   ├── UpdateCommand.java
 ├── helix.enums/
 │   ├── CommandType.java
 │   ├── ExecutionStatus.java
@@ -85,6 +90,7 @@ src/
 │   ├── HelixException.java
 │   ├── InvalidCommandException.java
 │   ├── InvalidNumberFormatException.java
+│   ├── InvalidTaskTypeException.java
 │   ├── MissingArgumentException.java
 │   ├── TaskIndexOutOfBoundsException.java
 │   └── TooManyArgumentsException.java
@@ -93,7 +99,13 @@ src/
 │   ├── Event.java
 │   ├── Task.java
 │   ├── Todo.java
+├── helix.ui/
+│   ├── ConsoleUi.java
+│   ├── MainApp.java
+│   ├── MainWindow.java
+│   ├── DialogBox.java
 ├── util/
+│   ├── Storage.java
 │   └── TaskList.java
 └── helix.Helix.java
 ```
