@@ -299,11 +299,3 @@ Goodbye! See you again soon!
 - Data **persists across sessions**, so tasks are not lost when restarting.
 
 ---
-
-## **Contributing**
-
-- Fork the repository.
-- Create a new branch (`feature-xyz`).
-- Commit changes and create a Pull Request (PR).
-
----
