@@ -24,36 +24,6 @@ Helix operates entirely through its **GUI interface**, where users can interact 
 
 ---
 
-## **Adding Deadlines**
-
-### **Command:**
-
-Adds a task with a deadline.
-
-#### **Syntax:**
-
-```bash
-deadline <task description> /by <YYYY-MM-DD HHmm>
-```
-
-#### **Example:**
-
-```bash
-deadline Submit assignment /by 2024-12-31 1800
-```
-
-#### **Expected Output:**
-
-```bash
-Task Added!
-  📋 Type: DEADLINE
-  📝 Description: Submit assignment
-  📅 Due: Dec 31 2024, 6:00 PM
-You now have X tasks in your list.
-```
-
----
-
 ## **Adding To-Do Tasks**
 
 ### **Command:**
@@ -83,7 +53,37 @@ You now have X tasks in your list.
 
 ---
 
-## **Adding Events**
+## **Adding Deadline Tasks**
+
+### **Command:**
+
+Adds a task with a deadline.
+
+#### **Syntax:**
+
+```bash
+deadline <task description> /by <YYYY-MM-DD HHmm>
+```
+
+#### **Example:**
+
+```bash
+deadline Submit assignment /by 2024-12-31 1800
+```
+
+#### **Expected Output:**
+
+```bash
+Task Added!
+  📋 Type: DEADLINE
+  📝 Description: Submit assignment
+  📅 Due: Dec 31 2024, 6:00 PM
+You now have X tasks in your list.
+```
+
+---
+
+## **Adding Event Tasks**
 
 ### **Command:**
 
