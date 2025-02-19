@@ -10,7 +10,7 @@ public class InvalidCommandException extends HelixException {
      * prompting the user to check the list of valid commands.
      */
     public InvalidCommandException() {
-        super("Invalid command. Type 'help' for a list of commands.");
+        super("Invalid command. Valid commands: TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, BYE, FIND, UPDATE.");
     }
 
     /**
