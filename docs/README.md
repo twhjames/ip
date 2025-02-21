@@ -1,6 +1,29 @@
 # Helix User Guide
 
-![Helix GUI](Ui.png)
+## **Table of Content**
+## Table of Contents
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+   - [Installation](#installation)
+   - [Basic Usage](#basic-usage)
+- [Features](#features)
+   - [Adding a TODO Task](#adding-a-todo-task)
+   - [Adding a DEADLINE Task](#adding-a-deadline-task)
+   - [Adding an Event Task](#adding-an-event-task)
+   - [Listing Tasks](#listing-tasks)
+   - [Marking Tasks as Completed](#marking-tasks-as-completed)
+   - [Unmarking Tasks](#unmarking-tasks)
+   - [Deleting a Task](#deleting-a-task)
+   - [Finding a Task](#finding-a-task)
+   - [Updating a Task](#updating-a-task)
+   - [Exiting Helix](#exiting-helix)
+- [File Storage](#file-storage)
+- [Command Summary](#command-summary)
+- [FAQ](#faq)
+- [UI Overview](#ui-overview)
+- [Feedback and Support](#feedback-and-support)
+--- 
+## **Introduction**
 \
 *A Smart Task Manager with a Simple and Efficient Graphical User Interface (GUI).*
 
@@ -9,6 +32,10 @@ Helix is a **personal task management assistant** that allows users to create, m
 ---
 
 ## **Getting Started**
+
+### Prerequisites
+- **For users**: Install **Java 17 JRE** to run Helix.
+- **For developers**: Install **Java 17 JDK** for development.
 
 ### **Installation**
 
@@ -24,26 +51,24 @@ Helix operates entirely through its **GUI interface**, where users can interact 
 
 ---
 
-## **Adding To-Do Tasks**
+## **Featues**
 
-### **Command:**
+### **Adding a TODO task**
 
+**Purpose:**
 Adds a simple to-do task.
 
-#### **Syntax:**
-
+**Syntax:**
 ```bash
 todo <task description>
 ```
 
-#### **Example:**
-
+**Example:**
 ```bash
 todo Buy groceries
 ```
 
-#### **Expected Output:**
-
+**Expected Output:**
 ```bash
 Task Added!
   📋 Type: TODO
@@ -53,25 +78,24 @@ You now have X tasks in your list.
 
 ---
 
-## **Adding Deadline Tasks**
+### **Adding a DEADLINE Task**
 
-### **Command:**
-
+**Purpose:**
 Adds a task with a deadline.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 deadline <task description> /by <YYYY-MM-DD HHmm>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 deadline Submit assignment /by 2024-12-31 1800
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 Task Added!
@@ -83,25 +107,24 @@ You now have X tasks in your list.
 
 ---
 
-## **Adding Event Tasks**
+### **Adding Event Tasks**
 
-### **Command:**
-
+**Purpose:**
 Adds an event with a start and end time.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 event <task description> /from <YYYY-MM-DD HHmm> /to <YYYY-MM-DD HHmm>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 event Team meeting /from 2024-12-31 0900 /to 2024-12-31 1100
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 Task Added!
@@ -114,19 +137,18 @@ You now have X tasks in your list.
 
 ---
 
-## **Listing Tasks**
+### **Listing Tasks**
 
-### **Command:**
-
+**Purpose:**
 Displays all tasks in the list.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 list
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 📋 Task List:
@@ -137,25 +159,24 @@ list
 
 ---
 
-## **Marking Tasks as Completed**
+### **Marking Tasks as Completed**
 
-### **Command:**
-
+**Purpose:**
 Marks a task as done.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 mark <task number>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 mark 2
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 ✔ Task marked as complete!
@@ -164,25 +185,24 @@ mark 2
 
 ---
 
-## **Unmarking Tasks**
+### **Unmarking Tasks**
 
-### **Command:**
-
+**Purpose:**
 Marks a task as **not done**.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 unmark <task number>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 unmark 2
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 ❌ Task marked as incomplete!
@@ -191,25 +211,24 @@ unmark 2
 
 ---
 
-## **Deleting a Task**
+### **Deleting a Task**
 
-### **Command:**
-
+**Purpose:**
 Removes a task from the list.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 delete <task number>
 ```
 
-#### **Example:**
+**Purpose:**
 
 ```bash
 delete 3
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 🗑️ Task Removed!
@@ -219,25 +238,24 @@ You now have X tasks in your list.
 
 ---
 
-## **Finding a Task**
+### **Finding a Task**
 
-### **Command:**
-
+**Purpose:**
 Searches for tasks containing a specific keyword.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 find <keyword>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 find groceries
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 🔍 Tasks with matching keywords...
@@ -246,25 +264,24 @@ find groceries
 
 ---
 
-## **Updating a Task**
+### **Updating a Task**
 
-### **Command:**
-
+**Purpose:**
 Updates a task’s description or details.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 update <task number> <task type> <new details>
 ```
 
-#### **Example:**
+**Example:**
 
 ```bash
 update 2 deadline Submit final report /by 2025-01-01 1200
 ```
 
-#### **Expected Output:**
+**Expected Output:**
 
 ```bash
 ✔ Task updated successfully!
@@ -273,29 +290,96 @@ update 2 deadline Submit final report /by 2025-01-01 1200
 
 ---
 
-## **Exiting Helix**
+### **Exiting Helix**
 
-### **Command:**
-
+**Purpose:**
 Closes the application.
 
-#### **Syntax:**
+**Syntax:**
 
 ```bash
 bye
-```
-
-#### **Expected Output:**
-
-```bash
-Goodbye! See you again soon!
 ```
 
 ---
 
 ## **File Storage**
 
+### **Automatic Task Storage**
 - Helix automatically **saves tasks** in `data/helix_tasklist.txt`.
 - Data **persists across sessions**, so tasks are not lost when restarting.
 
+### **Format in Which Tasks Are Saved**
+Each task is stored as a single line in the file, with its attributes separated by a `|`. The attributes are structured in the following order:
+1.	Task Type: `TODO`, `DEADLINE`, or `EVENT`.
+2.	Completion Status: `COMPLETED` or `PENDING`.
+3.	Task Description: The name or details of the task.
+4.	Date/Time:
+       - For deadline tasks: The due date and time (`MMM DD YYYY, hh:mm a`). 
+       - For event tasks: The start and end date/time (`MMM DD YYYY, hh:mm a - MMM DD YYYY, hh:mm a`).
+
+**Example Entries**
+```text
+TODO | COMPLETED | Hit the gym
+DEADLINE | PENDING | Submit iP Final Version | Feb 21 2025, 11:59 pm
+EVENT | PENDING | CS2103 Team meeting | Feb 25 2025, 6:00 pm - Feb 25 2025, 7:00 pm
+```
+
+### **Editing the Data File**
+You can manually edit the `helix_tasklist.txt` file using any text editor. Ensure that you follow the format specified above when modifying or adding new tasks. However, direct editing is not recommended as incorrect formatting may cause errors when loading tasks.
+
 ---
+
+## **Command Summary**
+
+| Command       | Description                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| `add todo <description>` | Adds a simple to-do task. Example: `add todo Read a book`                   |
+| `add deadline <description> /by <due date>` | Adds a task with a deadline. Example: `add deadline Submit report /by 2025-01-30` |
+| `add event <description> /from <start time> /to <end time>` | Adds an event. Example: `add event Team meeting /from 10am /to 12pm` |
+| `list`        | Displays all the tasks in your list.                                        |
+| `mark <task number>` | Marks the specified task as done. Example: `mark 1`                      |
+| `unmark <task number>` | Marks the specified task as not done. Example: `unmark 1`              |
+| `delete <task number>` | Deletes the specified task. Example: `delete 1`                       |
+| `find <keyword>` | Finds all tasks that contain the keyword. Example: `find groceries`        |
+| `update <task number> <task type> <new details>` | Updates an existing task. Example: `update 2 deadline Submit final report /by 2025-01-01 1200` |
+| `bye`         | Exits the chatbot.                                                         |
+
+---
+
+## **FAQ**
+
+### Q: Where are my tasks saved?
+- A: Your tasks are saved in the `data/helix_tasklist.txt` file within the application directory.
+
+### Q: Can I add multiple deadlines or events at once?
+- A: Currently, Helix supports adding one task at a time. You can repeat the command to add more tasks.
+
+### Q: What happens if I close Helix without saving?
+- A: Your tasks are saved automatically, ensuring no data loss between sessions.
+
+### Q: Can I edit a task once it is added?
+- A: Yes, you can use the `update` command as detailed in the [Command Summary](#command-summary).
+
+### Q: What are the system requirements for Helix?
+- A: Helix requires **Java (version 17 or higher)** to run. Ensure that Java is properly installed on your system before running Helix.
+
+---
+
+## **UI Overview**
+Below is a snapshot of the Helix user interface:
+![Helix GUI](Ui.png)
+- **Chat-Based Interaction** – User and bot messages are distinctly styled for clarity.
+- **Effortless Task Addition** – Tasks are added via natural language with instant confirmation.
+- **Clear Task Visualization** – Tasks are categorized and displayed for easy tracking.
+
+---
+
+## **Feedback and Support**
+If you encounter any issues or have suggestions for new features, feel free to:
+- Open an issue on the [GitHub repository](https://github.com/twhjames/ip/issues).
+- Contact us via email at **jamesteo2701@gmail.com**.
+
+---
+
+## **🎉 Enjoy using Helix 🎉**
